@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head> 
+    <meta charset="UTF-8">
+    <title>My Superhero</title>
+</head>
+<body>
+    <header>
+        <h1>My Superhero</h1>
+        <h2>
+            <a href="helmet.jpg">Black Panther</a>
+        </h2>
+    </header>
+
+    <main>
+        <img src="panther-black-panther.gif" alt="Black Panther">
+        <h3>"The World's Greatest"</h3>
+        <p>
+            <!-- Add your bio content here -->
+        </p>
+
+        <h4>Abilities</h4>
+        <ul>
+            <li>Enhanced strength and agility</li>
+            <li>Master strategist and hand-to-hand combatant</li>
+            <li>Vibranium suit and advanced technology</li>
+        </ul>
+
+        <h4>Avenger Allies</h4>
+        <ul>
+            <li>Captain America</li>
+        <li>Iron Man</li>
+            <li>Black Widow</li>
+        </ul>
+
+        <p>
+            <a href="https://www.google.com/search?q=Chadwick+Boseman+life+story" target="_blank">
+                Behind the Mask
+            </a>
+        </p>
+
+        <form>
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+
+            <label for="message">Your Message to Black Panther:</label><br>
+            <textarea id="message" name="message" rows="4" cols="40">Wakanda will always stand strong as long as you lead with wisdom and courage. The world is safer because of your strength and honor.</textarea><br><br>
+
+            <input type="submit" value="Send Message">
+        </form>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>

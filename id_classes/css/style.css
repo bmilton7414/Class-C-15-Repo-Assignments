@@ -1,0 +1,22 @@
+<style>
+        
+p {
+    color: purple;
+    text-align: center;
+}
+
+
+#para2 {
+    color: salmon;
+}
+
+  img {
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  body {
+    background-color: grey;
+  }
+    </style>
