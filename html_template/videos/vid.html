@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #photo-viewer { 
+position: relative; 
+height: 300px; 
+overflow: hidden; 
+} 
+
+#photo-viewer.is-loading:after { 
+content: url(images/load.gif); 
+position: absolute; 
+top: 0; 
+right: O;
+ } 
+
+#photo-viewer img {
+position: absolute; 
+max-width: 100%; 
+max-height: 100%; 
+top: 50%; 
+left: 50%;
+} 
+
+a.active { 
+opacity: 0.3; 
+} 
+
+       </style>
+</head>
+<body>
+    <video autoplay muted loop poster="video.jpg" id="videobg" controls>
+        <source src="KillerInstInct.mp4" type="video/mp4">
+       </video>
+
+
+
+       <div id="photo-viewer"></div> 
+        <div id="thumbnails"> 
+        <a href="DBZ1.PNG" class=" thumb active" titl e="El derberry mall ow"> 
+        <img src="DBZ1.PNG" alt="Elderberry Marshmallow" /></a> 
+        <a href="DBZ2.PNG" title="Rose Marshmallow" class="thumb"> 
+        <img src="DBZ2.PNG" alt="Rose Marshmallow" /></a> 
+        <a href="DBZ3.PNG" title="Chrysanthemum Marshmallow" class="thumb"> 
+        <img src="DBZ3.PNG" alt="Chrysanthemum Marshmallow" /></a> 
+        </div>
+
+        <div class="slide-viewer">
+            <div class="slide-group">
+<div class="slide slide-1"><!-- slide content --></div>
+<div class="slide slide-2"><!-- slide content --></div>
+<div class="slide slide-3"><!-- slide content --></div>
+<div class="slide slide-4"><!-- slide content --></div>
+
+            </div>
+        </div>
+        <div class="slide-buttons"></div>
+
+
+
+
+
+
+<script src="video.js"></script>
+
+
+</body>
+</html>
