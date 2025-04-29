@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Landing Page</title>
+  <style>
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sticky Header */
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #header-img {
+      width: 50px;
+      margin-left: 20px;
+    }
+
+    #nav-bar {
+      margin-right: 20px;
+    }
+
+    .nav-link {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content spacing below fixed header */
+    main {
+      padding-top: 100px;
+    }
+
+    section {
+      padding: 40px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    /* Flexbox example */
+    .features {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      flex: 1 1 30%;
+      margin: 10px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    /* Form section */
+    #form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #email {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 300px;
+      max-width: 100%;
+    }
+
+    #submit {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #submit:hover {
+      background-color: #555;
+    }
+
+    /* Responsive media query */
+    @media (max-width: 600px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <img src="https://via.placeholder.com/50" alt="Logo" id="header-img" />
+    <nav id="nav-bar">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#video-section">Demo</a>
+      <a class="nav-link" href="#contact">Sign Up</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="features">
+      <h2>Our Features</h2>
+      <div class="features">
+        <div class="feature">Feature One</div>
+        <div class="feature">Feature Two</div>
+        <div class="feature">Feature Three</div>
+      </div>
+    </section>
+
+    <section id="video-section">
+      <h2>Product Demo</h2>
+      <video id="video" width="560" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section id="contact">
+      <h2>Sign Up for Updates</h2>
+      <form id="form" action="https://www.freecodecamp.org/email-submit" method="POST">
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        <input type="submit" id="submit" value="Submit" />
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

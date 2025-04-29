@@ -1,0 +1,96 @@
+
+<!-- DOCTYPE: Informs the browser to render HTML5
+HTML: The standard markup language for creating web pages -->
+<!DOCTYPE html>
+
+ <!-- (html lang="en": Sets document language for accessibility and SEO) -->
+<html lang="en">
+
+<head>
+
+    <!--meta charset="UTF-8": Ensures correct text encoding-->
+    <meta charset="UTF-8">
+    <!-- meta viewport: Enables responsive design on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gooey Effect</title>
+    
+   <style>
+        /* CSS goes here;style tag: Contains CSS styles that apply to this page */
+
+    .stage-wrapper {
+    width: 800px; /*width/height define the visible area for animation */
+    height: 600px;
+    position: absolute; /*position:absolute removes it from normal flow, allowing precise placement. */
+    top: 50%; left: 50%;  /*top/left at 50% positions the element's top-left corner at center.*/
+    transform: translate(-50%, -50%); /*transform translate(-50%, -50%) shifts the element's origin to its center.*/
+    background: #fff;
+    filter: blur(10px) contrast(20); /* filter blur softens edges; contrast intensifies dark/light differences for gooey merge.*/
+}
+
+.obj-1 {
+
+/*width/height create a 200px by 200px box.*/
+width: 300px;
+height: 300px;
+position: absolute;
+top: 50%;
+background: blue;
+border-radius: 50%; /*border-radius:50% turns the box into a perfect circle.*/
+transform: translate(-50%, -50%);  /*transform translate centers each circle on its coordinates.*/
+}
+
+.obj-2 {
+
+    /*width/height create a 200px by 200px box.*/
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    background: navy;
+    border-radius: 50%; /*border-radius:50% turns the box into a perfect circle.*/
+    transform: translate(-50%, -50%);  /*transform translate centers each circle on its coordinates.*/
+}
+
+/* Keyframes define intermediate steps in an animation over time.*/
+@keyframes move-left-right {
+    /* 0%, 50%, 100% map to start, midpoint, and end of animation.*/
+    0% { left: 30%; }
+    50% { left: 50%; }
+    100% { left: 30%; }/* left property animates the horizontal position of objects.*/
+}
+@keyframes move-right-left {
+    0% { left: 70%; }
+    50% { left: 50%; }
+    100% { left: 70%; }
+}
+
+
+.obj-1 {
+    left: 30%;
+    animation: move-left-right 3s ease infinite;/*animation-name references the @keyframes block.*/
+}
+.obj-2 {
+    left: 70%;
+    animation: move-right-left 3s ease infinite;/*s duration sets the total time for one cycle.*/  /* ease timing function starts and ends slowl*/  /*infinite loops the animation forever.*/
+}
+    </style>
+    </head>
+
+<body>  
+    <!--navbar, .wrapper, .stage-wrapper: Containers for content and layout.-->
+<div class="navbar">
+        <span>Gooey Effect with CSS Filter</span>
+    </div>
+    <div class="wrapper">
+        <div class="stage-wrapper">
+            <div class="obj-1"></div>
+            <div class="obj-2"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+    
