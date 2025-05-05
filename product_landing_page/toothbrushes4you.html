@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrushBetter | Premium Toothbrushes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #2a7f62;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    #header-img {
+      height: 50px;
+    }
+
+    #nav-bar {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding-top: 100px;
+    }
+
+    section {
+      padding: 60px 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #features img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    #form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 300px;
+    }
+
+    #email {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #submit {
+      padding: 10px;
+      background-color: #2a7f62;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #submit:hover {
+      background-color: #256e55;
+    }
+
+    iframe {
+      max-width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      #nav-bar {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      iframe {
+        height: auto;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+    <script src="CodeCampTester.js"></script>
+  <!-- Header -->
+  <header id="header">
+    <img id="header-img" src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="BrushBetter Logo">
+    <nav id="nav-bar">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#video-section">Demo</a>
+      <a class="nav-link" href="#form-section">Subscribe</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Product Description -->
+    <section id="features">
+      <h2>Meet the BrushBetter™ Toothbrush</h2>
+      <p>Upgrade your dental routine with our premium toothbrush designed for comfort, precision, and hygiene. Our ultra-soft bristles clean better, feel better, and last longer. Eco-friendly handle, dentist-approved results.</p>
+      <ul>
+        <li>✅ Gentle on gums, tough on plaque</li>
+        <li>✅ Ergonomic, recyclable handle</li>
+        <li>✅ Trusted by over 10,000 customers</li>
+      </ul>
+      <img src="img/toothbrush.jpg" alt="BrushBetter Toothbrushes">
+    </section>
+
+    <!-- Product Demo Video -->
+    <section id="video-section">
+      <h2>Watch How BrushBetter Works</h2>
+      <iframe
+        id="video"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/BapR9J86ZZw"
+
+        title="Toothbrush Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </section>
+
+    <!-- Email Subscription Form -->
+    <section id="form-section">
+      <h2>Get Exclusive Offers</h2>
+      <p>Subscribe with your email and get 15% off your first order!</p>
+      <form id="form" action="https://www.freecodecamp.org/email-submit">
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="submit" id="submit" value="Subscribe">
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
