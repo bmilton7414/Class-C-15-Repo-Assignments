@@ -1,7 +1,17 @@
 /******************
  * YOUR CODE BELOW *
  ******************/
-
+var myFirstName = "Blakk"; 
+var myLastName = "Arab";
+var myFavoriteCeleb = "Ja Morant";
+var mySentence = "I am " + myFirstName + " " + myLastName + " and my favorite celebrity is " + myFavoriteCeleb + ".";
+var myLuckyNum = 74;
+var myAge = 32;
+var myHeight = 5.10; // in feet
+var myFavoriteYear = 1992;
+var mySum = 2358;
+var myProduct = 4992;
+var myHeightAndAge = myHeight + myAge; // 5.10 + 32 = 37.1
 
 /*********************************************************************************************************************
 
