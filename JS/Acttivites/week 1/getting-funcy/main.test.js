@@ -2,6 +2,40 @@
  * YOUR CODE GOES HERE THIS TIME! *
  **********************************/
 
+// ===== Variables =====
+let x = 3;
+let y = 10;
+let z = 4;
+
+let greeting = 'hello';
+let firstName = 'Cody'; // Replace 'Cody' with your actual name if needed
+let callStatus = 'ringing';
+
+// ===== Functions =====
+function double() {
+  x = x * 2;
+}
+
+function triple() {
+  y = y * 3;
+}
+
+function square() {
+  z = z * z;
+}
+
+function beNice() {
+  greeting = 'hello, ' + firstName + '! Hope you’re having a great day.';
+}
+
+function changeName() {
+  firstName = 'Danger';
+}
+
+function hangUp() {
+  callStatus = 'call ended';
+}
+
 
 
 /*********************************************************************************************************************

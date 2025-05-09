@@ -20,6 +20,22 @@
 
 
 // Variable is a way to store data types in a memory space. Declared with the key word var. 
+var myName = "Arab"; 
+console.log(myName);
+
+
+let myAge = 32;
+console.log(myAge);
+
+
+const myNameCity = "Memphis";
+
+
+
+
+
+
+
 
 // No nummbers allowed when declaring variable 
 
