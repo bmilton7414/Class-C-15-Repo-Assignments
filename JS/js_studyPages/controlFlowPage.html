@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Control Flow Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Control Flow Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: if, if/else, else if, switch Statements</h2>
+      <p>
+        Control flow statements allow branching logic based on conditions. The primary constructs are:
+      </p>
+      <ul>
+        <li><strong>if Statement:</strong> Executes a block when a condition is truthy.</li>
+        <li><strong>if/else:</strong> Provides an alternative block when the condition is falsy.</li>
+        <li><strong>else if:</strong> Chains multiple conditions in sequence.</li>
+        <li><strong>switch:</strong> Compares an expression to multiple case values, executing matching block(s).</li>
+        <li><strong>Conditional (Ternary) Operator:</strong> <code>condition ? expr1 : expr2</code> for simple inline branching.</li>
+      </ul>
+      <p><strong>Key Details & Pitfalls:</strong></p>
+      <ul>
+        <li>Conditions use truthy/falsy evaluation: <code>false, 0, "", null, undefined, NaN</code> are falsy; all else truthy.</li>
+        <li>Avoid assignment (<code>=</code>) inside <code>if</code>—use <code>===</code> or <code>==</code> for comparison.</li>
+        <li>Be aware of type coercion in <code>switch</code>: uses <code>===</code> for comparison, no coercion.</li>
+        <li>Don’t forget <code>break</code> in <code>switch</code> to prevent fall-through unless intentional.</li>
+        <li>Use braces <code>{ }</code> even for single-statement blocks to avoid ambiguity when adding code later.</li>
+      </ul>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Use <code>===</code>/<code>!==</code> for strict comparison in <code>if</code> conditions to avoid unexpected type coercion.</li>
+        <li>Group related <code>else if</code> conditions logically; consider <code>switch</code> when comparing a single expression to many constants.</li>
+        <li>For complex conditional logic, consider refactoring into separate functions or lookup objects.</li>
+        <li>In <code>switch</code>, use <code>default</code> to handle unexpected values.</li>
+      </ul>
+    </div>
+
+    <!-- Example 1: Basic if Statement -->
+    <div class="example">
+      <h2>Example 1: Basic <code>if</code> Statement</h2>
+      <p>
+        The <code>if</code> statement executes a block if its condition evaluates to <code>true</code> (truthy).
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Declare a value
+const score = 75;
+
+// Step 2: Basic if statement
+if (score >= 60) {
+  console.log("Passed the exam"); // Expected Output: Passed the exam
+}
+
+// Step 3: if with falsy condition
+if (0) {
+  console.log("This will not run"); // No output, 0 is falsy
+}
+
+// Step 4: Using expressions in condition
+const user = { isActive: true };
+if (user.isActive && score > 50) {
+  console.log("Active user with good score"); // Expected Output: Active user with good score
+}
+
+// Explanation:
+// - Condition inside if is evaluated for truthiness.
+// - Use parentheses around complex expressions for clarity.
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: if/else and Truthy/Falsy -->
+    <div class="example">
+      <h2>Example 2: <code>if/else</code> & Truthy/Falsy Values</h2>
+      <p>
+        <code>if/else</code> provides an alternative block when the condition is falsy.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Declare a variable
+let value = "";
+
+// Step 2: if/else with truthy/falsy
+if (value) {
+  console.log("Value is truthy");
+} else {
+  console.log("Value is falsy or empty"); // Expected Output
+}
+
+// Step 3: Checking undefined
+let userName;
+if (userName !== undefined) {
+  console.log("UserName defined:", userName);
+} else {
+  console.log("UserName is undefined"); // Expected Output
+}
+
+// Step 4: Using Boolean() to force conversion
+const input = "0";
+if (Boolean(input)) {
+  console.log("Non-empty string is truthy"); // Expected Output
+} else {
+  console.log("String is empty or falsy");
+}
+
+// Explanation:
+// - Strings with length > 0 are truthy, even "0".
+// - Use explicit checks (e.g., !== undefined) for clarity.
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: if/else if/else Chain -->
+    <div class="example">
+      <h2>Example 3: <code>if / else if / else</code> Chain</h2>
+      <p>
+        Chain multiple conditions to handle more than two cases.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Define temperature variable
+const temp = 75;
+
+// Step 2: Chain with else if
+if (temp <= 32) {
+  console.log("Freezing weather"); 
+} else if (temp > 32 && temp <= 50) {
+  console.log("Cold weather"); 
+
+} else if (temp > 50 && temp <= 70) {
+  console.log("Moderate weather"); // Expected Output
+
+} else if (temp > 70 && temp <= 90) {
+  console.log("Warm weather"); 
+
+} else {
+  console.log("Hot weather"); 
+}
+
+// Step 3: Nested if (avoid deep nesting)
+const age = 20;
+if (age >= 18) {
+  if (age >= 21) {
+    console.log("Adult and can drink");
+  } else {
+    console.log("Adult but cannot drink"); // Expected Output
+  }
+} else {
+  console.log("Minor");
+}
+
+// Explanation:
+// - Use else if to check sequential conditions.
+// - Deep nesting reduces readability; consider combining conditions logically or using early returns in functions.
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: switch Statement Basics -->
+    <div class="example">
+      <h2>Example 4: <code>switch</code> Statement Basics</h2>
+      <p>
+        <code>switch</code> compares an expression to multiple case values using strict equality (<code>===</code>), executing the matching block.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Define a day variable
+const day = 3;
+
+// Step 2: switch on day
+switch (day) {
+  case 1:
+    console.log("Monday");
+    break;
+  case 2:
+    console.log("Tuesday");
+    break;
+  case 3:
+    console.log("Wednesday"); // Expected Output
+    break;
+  case 4:
+    console.log("Thursday");
+    break;
+  case 5:
+    console.log("Friday");
+    break;
+  default:
+    console.log("Weekend");
+}
+
+// Step 3: switch without break (fall-through)
+const level = 2;
+switch (level) {
+  case 1:
+    console.log("Level 1");
+  case 2:
+    console.log("Level 2"); // Expected Output
+  case 3:
+    console.log("Level 3"); // Expected Output because fall-through
+    break;
+  default:
+    console.log("Unknown level");
+}
+
+// Explanation:
+// - Each case uses strict comparison; no coercion.
+// - Use break to prevent fall-through. Omitting break allows next cases to run.
+// - default handles unmatched values; can be placed anywhere but conventionally last.
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: switch with Multiple Cases & Expressions -->
+    <div class="example">
+      <h2>Example 5: <code>switch</code> with Multiple Cases & Expressions</h2>
+      <p>
+        Combine multiple case labels or use expressions for more flexibility.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Multiple case labels share same block
+const fruit = "banana";
+switch (fruit) {
+  case "apple":
+  case "banana":
+  case "cherry":
+    console.log("This is a fruit"); // Expected Output
+    break;
+  case "lettuce":
+  case "spinach":
+    console.log("This is a vegetable");
+    break;
+  default:
+    console.log("Unknown food");
+}
+
+// Step 2: Using expressions in case
+const score = 85;
+switch (true) {
+  case score >= 90:
+    console.log("Grade A");
+    break;
+  case score >= 75:
+    console.log("Grade B"); // Expected Output
+    break;
+  case score >= 60:
+    console.log("Grade C");
+    break;
+  default:
+    console.log("Grade F");
+    break;
+}
+
+// Explanation:
+// - Group cases without break to run same block.
+// - switch(true) allows evaluating expressions in case labels.
+// - Only strict === comparisons; switch(true) compares true === (expression) boolean result.
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Using if vs switch & Common Pitfalls -->
+    <div class="example">
+      <h2>Example 6: Using <code>if</code> vs <code>switch</code> & Common Pitfalls</h2>
+      <p>
+        When to choose <code>if</code> chains vs <code>switch</code> statements, and pitfalls to watch.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Scenario: Check user role
+const role = "editor";
+
+// Using if/else if
+if (role === "admin") {
+  console.log("Admin access");
+} else if (role === "editor") {
+  console.log("Editor access"); // Expected Output
+} else if (role === "viewer") {
+  console.log("Viewer access");
+} else {
+  console.log("No access");
+}
+
+// Using switch
+switch (role) {
+  case "admin":
+    console.log("Admin access");
+    break;
+  case "editor":
+    console.log("Editor access"); // Expected Output
+    break;
+  case "viewer":
+    console.log("Viewer access");
+    break;
+  default:
+    console.log("No access");
+}
+
+// Pitfall: forgetting break
+const color = "green";
+switch (color) {
+  case "red":
+    console.log("Stop");
+  case "green":
+    console.log("Go"); // Expected Output (but also "Proceed" below)
+  case "yellow":
+    console.log("Slow down"); // Unexpected due to fall-through
+    break;
+  default:
+    console.log("Invalid color");
+}
+
+// Corrected with break
+switch (color) {
+  case "red":
+    console.log("Stop");
+    break;
+  case "green":
+    console.log("Go"); // Expected Output
+    break;
+  case "yellow":
+    console.log("Slow down");
+    break;
+  default:
+    console.log("Invalid color");
+}
+
+// Explanation:
+// - Use switch when comparing one expression to many discrete values.
+// - Ensure break after each case unless intentional fall-through.
+// - if/else is better when conditions involve ranges or complex expressions.
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: Nested if & Early Returns -->
+    <div class="example">
+      <h2>Example 7: Nested <code>if</code> & Early Returns</h2>
+      <p>
+        Avoid deep nesting by using early returns in functions for cleaner logic.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Deeply nested if (less readable)
+function checkUser(user) {
+  if (user) {
+    if (user.isActive) {
+      if (user.age >= 18) {
+        console.log("Active adult user"); // Expected Output if conditions met
+      } else {
+        console.log("Active but underage");
+      }
+    } else {
+      console.log("Inactive user");
+    }
+  } else {
+    console.log("No user provided");
+  }
+}
+checkUser({ isActive: true, age: 25 });
+
+// Step 2: Early return style (more readable)
+function checkUserClean(user) {
+  if (!user) {
+    console.log("No user provided");
+    return;
+  }
+  if (!user.isActive) {
+    console.log("Inactive user");
+    return;
+  }
+  if (user.age < 18) {
+    console.log("Active but underage");
+    return;
+  }
+  console.log("Active adult user"); // Expected Output
+}
+checkUserClean({ isActive: true, age: 25 });
+
+// Explanation:
+// - Early returns reduce nesting and clarify each condition path.
+      </textarea>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: Conditional (Ternary) vs if/else -->
+    <div class="example">
+      <h2>Example 8: Conditional (Ternary) vs <code>if/else</code></h2>
+      <p>
+        Ternary operator is concise for simple conditions, but if/else is clearer for complex logic.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Simple ternary
+const age = 20;
+const status = age >= 18 ? "Adult" : "Minor";
+console.log("Status:", status); // Expected: Adult
+
+// Step 2: Nested ternary (less readable)
+const score = 85;
+const grade = score >= 90 ? "A" :
+              score >= 80 ? "B" :
+              score >= 70 ? "C" :
+              "F";
+console.log("Grade:", grade); // Expected: B
+
+// Step 3: Equivalent if/else if
+let gradeIf;
+if (score >= 90) {
+  gradeIf = "A";
+} else if (score >= 80) {
+  gradeIf = "B";
+} else if (score >= 70) {
+  gradeIf = "C";
+} else {
+  gradeIf = "F";
+}
+console.log("Grade with if/else:", gradeIf); // Expected: B
+
+// Explanation:
+// - Use ternary for concise single-expression conditions.
+// - For multiple branches, prefer if/else for readability.
+      </textarea>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: switch with Ranges Using true -->
+    <div class="example">
+      <h2>Example 9: <code>switch</code> with Ranges Using <code>true</code></h2>
+      <p>
+        Use <code>switch(true)</code> to handle ranges or complex boolean cases in <code>switch</code>.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Define a value
+const value = 45;
+
+// Step 2: switch(true) for range checks
+switch (true) {
+  case (value >= 0 && value <= 25):
+    console.log("Value between 0 and 25");
+    break;
+  case (value > 25 && value <= 50):
+    console.log("Value between 26 and 50"); // Expected Output
+    break;
+  case (value > 50 && value <= 75):
+    console.log("Value between 51 and 75");
+    break;
+  default:
+    console.log("Value outside 0-75");
+}
+
+// Explanation:
+// - switch(true) compares true === (expression) for each case.
+// - Allows using logical expressions in case labels.
+// - Maintain break to prevent fall-through.
+      </textarea>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: Complex Condition Examples & Best Practices -->
+    <div class="example">
+      <h2>Example 10: Complex Condition Examples & Best Practices</h2>
+      <p>
+        Combine logical operators, nested conditions, and switch in practical scenarios.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: User role and status check with if/else if
+const user = { role: "admin", isActive: true };
+if (!user) {
+  console.log("No user");
+} else if (!user.isActive) {
+  console.log("User inactive");
+} else if (user.role === "admin") {
+  console.log("Admin dashboard"); // Expected Output
+} else if (user.role === "editor") {
+  console.log("Editor dashboard");
+} else {
+  console.log("Viewer dashboard");
+}
+
+// Step 2: Combining conditions
+const hour = new Date().getHours();
+if (hour < 12) {
+  console.log("Good morning");
+} else if (hour < 18) {
+  console.log("Good afternoon");
+} else {
+  console.log("Good evening");
+}
+
+// Step 3: switch for command handling
+const command = "delete";
+switch (command) {
+  case "create":
+    console.log("Creating item");
+    break;
+  case "update":
+    console.log("Updating item");
+    break;
+  case "delete":
+    console.log("Deleting item"); // Expected Output
+    break;
+  default:
+    console.log("Unknown command");
+}
+
+// Best Practices:
+// - Use parentheses to clarify complex logical conditions.
+// - Prefer early returns in functions to reduce nesting.
+// - For multiple discrete value checks, switch is clearer than long if/else if chains.
+// - Always include a default case in switch.
+      </textarea>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

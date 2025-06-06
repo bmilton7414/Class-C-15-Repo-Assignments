@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Functions Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Functions Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: JavaScript Functions</h2>
+      <p>
+        In JavaScript, functions are first-class objects that encapsulate reusable blocks of code. They can be:
+      </p>
+      <ul>
+        <li>Declared using <code>function foo() { }</code></li>
+        <li>Expressed as <code>const foo = function() { }</code> or arrow functions <code>const foo = () =&gt; { }</code></li>
+        <li>Passed as arguments (callbacks)</li>
+        <li>Returned from other functions (higher-order functions)</li>
+        <li>Invoked immediately (IIFE)</li>
+      </ul>
+      <p><strong>Key Concepts:</strong></p>
+      <ul>
+        <li><strong>Hoisting:</strong> Function declarations are hoisted, allowing calls before definition. Function expressions and arrow functions only hoist the variable name as <code>undefined</code>.</li>
+        <li><strong>Scope & Closures:</strong> Functions create their own lexical scope. Inner functions form closures by retaining access to outer variables even after the outer function has returned.</li>
+        <li><strong><code>arguments</code> Object:</strong> Available in non-arrow functions, contains all passed arguments. Arrow functions do not have their own <code>arguments</code> object.</li>
+        <li><strong>Parameters:</strong> Default parameters, rest parameters (<code>...args</code>), and the ability to destructure parameters are supported.</li>
+        <li><strong>Method Shorthand:</strong> Within object literals, functions can be defined as <code>foo() { }</code> instead of <code>foo: function() { }</code>.</li>
+        <li><strong>Generator Functions:</strong> Declared with <code>function* gen() { }</code> and use <code>yield</code> to produce values on demand.</li>
+        <li><strong>Async Functions & Promises:</strong> Declared with <code>async function</code> and use <code>await</code> for asynchronous operations.</li>
+        <li><strong>Function Properties:</strong> <code>.name</code> (identifier), <code>.length</code> (number of declared parameters), and functions can have custom properties since they are objects.</li>
+        <li><strong>Function Constructor:</strong> <code>new Function('a', 'b', 'return a+b');</code> creates functions dynamically, though not commonly used due to security concerns.</li>
+      </ul>
+      <p><strong>Quick Tips & Pitfalls:</strong></p>
+      <ul>
+        <li>Prefer function declarations or <code>const</code> function expressions to avoid accidental reassignments.</li>
+        <li>Beware of <code>this</code> differences: regular functions have dynamic <code>this</code>, arrow functions inherit from the lexical context.</li>
+        <li>Avoid overusing nested ternary operators for readability.</li>
+        <li>Generator and async functions must be used appropriately: <code>yield</code> and <code>await</code> only valid inside those.</li>
+      </ul>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Name functions clearly to reflect their purpose.</li>
+        <li>Use JSDoc comments to document parameter types and return values.</li>
+        <li>Minimize side effects; prefer pure functions when possible.</li>
+        <li>Use arrow functions for short callbacks, but regular functions when <code>this</code> or <code>arguments</code> is needed.</li>
+      </ul>
+    </div>
+
+    <!-- Example 1: Function Declaration & Hoisting -->
+    <div class="example">
+      <h2>Example 1: Function Declaration & Hoisting</h2>
+      <p>
+        Function declarations are hoisted during the compile phase, allowing you to call them before their definition. They also create a separate local scope for parameters and internal variables.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Call function before its declaration
+console.log("Calling declaredFunc before definition:", declaredFunc(5, 3)); 
+// Expected Output: 8
+
+// Step 2: Function declaration
+function declaredFunc(a, b) {
+  console.log("Inside declaredFunc: a =", a, ", b =", b);
+  return a + b;
+}
+
+// Step 3: Call after declaration
+console.log("Calling declaredFunc after definition:", declaredFunc(10, 2)); 
+// Expected Output: 12
+
+// Step 4: Inspect function properties
+console.log("Function name:", declaredFunc.name);     // Output: declaredFunc
+console.log("Function length (params):", declaredFunc.length); // Output: 2
+
+// Step 5: Use 'arguments' in a non-arrow function
+function sumArguments() {
+  let total = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  console.log("arguments object:", arguments);
+  return total;
+}
+console.log("Sum using arguments:", sumArguments(1, 2, 3, 4)); // Output: 10
+
+// Explanation:
+// - declaredFunc is hoisted, so it runs before its definition.
+// - 'arguments' object available holds all passed arguments.
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: Function Expression, Arrow Function & Hoisting Differences -->
+    <div class="example">
+      <h2>Example 2: Function Expression, Arrow Function & Hoisting Differences</h2>
+      <p>
+        Function expressions and arrow functions are not hoisted as callable. Their variable names are hoisted but initialized to <code>undefined</code>.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Attempt to call function expression before assignment
+try {
+  console.log("Calling exprFunc before definition:", exprFunc(5, 3)); 
+} catch (e) {
+  console.log("Error:", e.message); 
+  // Expected: "exprFunc is not a function"
+}
+
+// Step 2: Function expression assigned to const
+const exprFunc = function(a, b) {
+  return a * b;
+};
+
+// Step 3: Call after assignment
+console.log("Calling exprFunc after definition:", exprFunc(5, 3)); 
+// Expected Output: 15
+
+// Step 4: Arrow function example
+const arrowFunc = (x, y) => {
+  console.log("Arrow this.value (in global):", this.value);
+  return x - y;
+};
+console.log("Calling arrowFunc:", arrowFunc(10, 4)); // Output: 6
+
+// Step 5: Inspect arrow function properties
+console.log("Arrow function name:", arrowFunc.name);   // arrowFunc
+console.log("Arrow function length:", arrowFunc.length); // 2
+
+// Explanation:
+// - exprFunc variable is hoisted but undefined until assignment.
+// - arrow functions inherit 'this' from lexical scope; no own 'arguments' object.
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: Method Shorthand, Dynamic Functions & 'this' in Methods -->
+    <div class="example">
+      <h2>Example 3: Method Shorthand, Dynamic Functions & <code>this</code> in Methods</h2>
+      <p>
+        Objects can define methods using shorthand syntax. You can also create functions dynamically using the Function constructor.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Method shorthand in object literal
+const user = {
+  name: "Alice",
+  age: 30,
+  // Shorthand method
+  greet() {
+    console.log(`Hello, I'm ${this.name} and I'm ${this.age}`);
+  },
+  // Getter and setter
+  get info() {
+    return `${this.name}, ${this.age}`;
+  },
+  set updateName(newName) {
+    this.name = newName;
+  }
+};
+user.greet();         // Hello, I'm Alice and I'm 30
+console.log("User info:", user.info); // Alice, 30
+user.updateName = "Bob";
+console.log("Updated name via setter:", user.name); // Bob
+
+// Step 2: Dynamic function creation (Function constructor)
+const dynamicSum = new Function("a", "b", "return a + b;");
+console.log("Dynamic sum:", dynamicSum(4, 6)); // 10
+
+// Step 3: 'this' in different contexts
+function showThis() {
+  console.log("Regular function this:", this);
+}
+const arrowShowThis = () => {
+  console.log("Arrow function this:", this);
+};
+showThis();         // global or undefined in strict mode
+arrowShowThis();    // inherits lexical 'this' (likely window or undefined)
+
+// Step 4: Method borrowed with call/apply/bind
+const objA = { value: 5 };
+const objB = { value: 10 };
+function showValue(prefix) {
+  console.log(prefix, this.value);
+}
+showValue.call(objA, "A's value:"); // A's value: 5
+showValue.apply(objB, ["B's value:"]); // B's value: 10
+const boundShow = showValue.bind(objA);
+boundShow("Bound value:"); // Bound value: 5
+
+// Explanation:
+// - Method shorthand automatically binds 'this' to object when called as method.
+// - Function constructor creates functions from strings; not recommended for untrusted input.
+// - call/apply/bind set 'this' explicitly.
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Parameters—Default, Rest, Destructuring & Arguments Object -->
+    <div class="example">
+      <h2>Example 4: Parameters—Default, Rest, Destructuring & <code>arguments</code> Object</h2>
+      <p>
+        Demonstrating default parameters, rest parameters, parameter destructuring, and using the <code>arguments</code> object.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Default parameters
+function greet(name = "Guest", greeting = "Hello") {
+  console.log(`${greeting}, ${name}!`);
+}
+greet("Alice");           // Hello, Alice!
+greet();                  // Hello, Guest!
+greet("Bob", "Welcome");  // Welcome, Bob!
+
+// Step 2: Rest parameters
+function combine(separator, ...items) {
+  console.log("Items array (rest):", items);
+  return items.join(separator);
+}
+console.log("Combined:", combine("-", "a", "b", "c")); // a-b-c
+
+// Step 3: Parameter destructuring with defaults
+function displayUser({ name = "Unknown", age = 0, city = "N/A" } = {}) {
+  console.log(`Name: ${name}, Age: ${age}, City: ${city}`);
+}
+displayUser({ name: "Charlie", age: 25 }); // Name: Charlie, Age: 25, City: N/A
+displayUser();                            // Name: Unknown, Age: 0, City: N/A
+
+// Step 4: Using 'arguments' object in non-arrow function
+function showArguments() {
+  console.log("arguments object:", arguments);
+  for (let i = 0; i < arguments.length; i++) {
+    console.log(`Argument ${i}:`, arguments[i]);
+  }
+}
+showArguments("x", 42, true);
+
+// Step 5: Arrow functions do not have 'arguments'
+const arrowArgs = () => {
+  try {
+    console.log("Arrow arguments:", arguments);
+  } catch (e) {
+    console.log("Error accessing arguments in arrow:", e.message);
+  }
+};
+arrowArgs("x", "y");
+
+// Explanation:
+// - Default parameters initialize when no argument or undefined is passed.
+// - Rest parameter collects remaining args into an array; must be last.
+// - Destructuring parameters allows unpacking objects or arrays into variables.
+// - 'arguments' is array-like for non-arrow functions; arrow functions lack it.
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: Higher-Order Functions, Callbacks & Promises -->
+    <div class="example">
+      <h2>Example 5: Higher-Order Functions, Callbacks & Promises</h2>
+      <p>
+        Higher-order functions accept callbacks or return functions. Promises represent asynchronous results.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Higher-order function that accepts a callback
+function fetchData(callback) {
+  console.log("Fetching data...");
+  setTimeout(() => {
+    const data = { id: 1, name: "Sample Data" };
+    callback(data);
+  }, 500);
+}
+
+// Step 2: Callback function
+function handleData(data) {
+  console.log("Data received in callback:", data);
+}
+
+// Step 3: Call higher-order function with callback
+fetchData(handleData);
+
+// Step 4: Higher-order function that returns a function
+function multiplyBy(n) {
+  return function(x) {
+    return x * n;
+  };
+}
+const double = multiplyBy(2);
+console.log("Double 5:", double(5)); // 10
+const triple = multiplyBy(3);
+console.log("Triple 5:", triple(5)); // 15
+
+// Step 5: Promisified version of fetchData
+function fetchDataPromise() {
+  return new Promise((resolve, reject) => {
+    console.log("Fetching data (Promise)...");
+    setTimeout(() => {
+      const data = { id: 2, name: "Promise Data" };
+      resolve(data);
+    }, 500);
+  });
+}
+fetchDataPromise()
+  .then(data => {
+    console.log("Data received in Promise:", data);
+    return "Next step";
+  })
+  .then(msg => {
+    console.log(msg);
+  })
+  .catch(err => {
+    console.error("Error:", err);
+  });
+
+// Explanation:
+// - fetchData demonstrates callback pattern for async.
+// - Promises offer structured async with .then/.catch chaining.
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Immediately Invoked Function Expression (IIFE) & Module Pattern -->
+    <div class="example">
+      <h2>Example 6: Immediately Invoked Function Expression (IIFE) & Module Pattern</h2>
+      <p>
+        IIFEs run immediately, creating a new scope. They are often used to implement the module pattern.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Simple IIFE
+(function() {
+  const temp = "IIFE Scope";
+  console.log("Inside IIFE:", temp); // IIFE Scope
+})();
+
+// Step 2: Attempt access outside IIFE
+try {
+  console.log(temp);
+} catch (e) {
+  console.log("Error accessing temp outside IIFE:", e.message);
+  // ReferenceError: temp is not defined
+}
+
+// Step 3: Module pattern using IIFE
+const CounterModule = (function() {
+  let count = 0; // private
+  return {
+    increment() {
+      count++;
+      console.log("Counter:", count);
+    },
+    decrement() {
+      count--;
+      console.log("Counter:", count);
+    },
+    getCount() {
+      return count;
+    }
+  };
+})();
+CounterModule.increment(); // 1
+CounterModule.increment(); // 2
+console.log("Current count:", CounterModule.getCount()); // 2
+CounterModule.decrement(); // 1
+
+// Explanation:
+// - IIFE creates private scope, preventing global pollution.
+// - Module pattern returns public methods that can access private variables.
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: Closures & Private Variables -->
+    <div class="example">
+      <h2>Example 7: Closures & Private Variables</h2>
+      <p>
+        Closures occur when an inner function retains access to outer function’s variables even after the outer function has returned, enabling private state and partial application.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Function that creates a closure (counter)
+function counter() {
+  let count = 0; // private variable
+  return function() {
+    count++;
+    console.log("Current count:", count);
+  };
+}
+const counterA = counter();
+const counterB = counter();
+counterA(); // 1
+counterA(); // 2
+counterB(); // 1
+
+// Step 2: Partial application using closure
+function multiplier(factor) {
+  return function(x) {
+    return x * factor;
+  };
+}
+const doubleFn = multiplier(2);
+const tripleFn = multiplier(3);
+console.log("Double 4:", doubleFn(4)); // 8
+console.log("Triple 4:", tripleFn(4)); // 12
+
+// Step 3: Closure example with loop
+function createFuncs() {
+  const funcs = [];
+  for (let i = 0; i < 3; i++) {
+    funcs.push(function() {
+      console.log("Value of i:", i);
+    });
+  }
+  return funcs;
+}
+const funcArray = createFuncs();
+funcArray[0](); // 0
+funcArray[1](); // 1
+funcArray[2](); // 2
+
+// Explanation:
+// - Each returned function closes over its own lexical environment.
+// - let in loop ensures block-scoped 'i'; if using var, all would log 3.
+      </textarea>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: Recursion & Tail Call Optimization -->
+    <div class="example">
+      <h2>Example 8: Recursion & Tail Call Optimization</h2>
+      <p>
+        Functions can call themselves recursively. Modern JS engines may support tail call optimization when the recursive call is the last action.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Recursive function to calculate factorial
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+console.log("Factorial of 5:", factorial(5)); // 120
+
+// Step 2: Tail-recursive version (ES6 engines may optimize)
+function factorialTail(n, acc = 1) {
+  if (n <= 1) return acc;
+  return factorialTail(n - 1, n * acc);
+}
+console.log("Tail factorial of 5:", factorialTail(5)); // 120
+
+// Step 3: Recursive function for Fibonacci (inefficient, for demonstration)
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+console.log("Fibonacci of 6:", fibonacci(6)); // 8
+
+// Explanation:
+// - Standard recursion can cause stack overflow for large input.
+// - Tail recursion, when optimized, reuses the same stack frame.
+      </textarea>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: Async/Await Functions & Error Handling -->
+    <div class="example">
+      <h2>Example 9: Async/Await Functions & Error Handling</h2>
+      <p>
+        <code>async</code> functions return Promises. Use <code>await</code> to pause execution until a Promise resolves. Use <code>try/catch</code> for error handling.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Function returning a promise
+function fetchNumber() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const num = Math.random();
+      if (num > 0.5) resolve(num);
+      else reject("Number too small");
+    }, 500);
+  });
+}
+
+// Step 2: Async function using await
+async function getNumber() {
+  try {
+    console.log("Awaiting fetchNumber...");
+    const value = await fetchNumber();
+    console.log("Received number:", value);
+    return value;
+  } catch (error) {
+    console.error("Error in getNumber:", error);
+    return null;
+  }
+}
+
+// Step 3: Call async function
+getNumber().then(result => {
+  console.log("Result from async function:", result);
+});
+
+// Step 4: Async IIFE
+(async () => {
+  const result = await getNumber();
+  console.log("Result from IIFE async call:", result);
+})();
+
+// Explanation:
+// - async keyword makes function return a Promise.
+// - await pauses until the Promise resolves or rejects.
+// - Use try/catch to handle rejections inside async functions.
+      </textarea>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: Generator Functions & Iteration -->
+    <div class="example">
+      <h2>Example 10: Generator Functions & Iteration</h2>
+      <p>
+        Generator functions (declared with <code>function*</code>) yield multiple values lazily and can maintain internal state.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: Generator function yielding sequence
+function* numberGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
+  return 4;
+}
+
+// Step 2: Create generator object
+const gen = numberGenerator();
+
+// Step 3: Iterate manually with next()
+console.log("gen.next():", gen.next()); // { value: 1, done: false }
+console.log("gen.next():", gen.next()); // { value: 2, done: false }
+console.log("gen.next():", gen.next()); // { value: 3, done: false }
+console.log("gen.next():", gen.next()); // { value: 4, done: true }
+console.log("gen.next():", gen.next()); // { value: undefined, done: true }
+
+// Step 4: Use for...of to iterate (stops before return)
+for (const num of numberGenerator()) {
+  console.log("Iterated value:", num);
+}
+// Output: 1, 2, 3
+
+// Explanation:
+// - yield pauses and resumes generator function.
+// - return sets done to true with return value.
+// - for...of ignores the return value, only iterates yields.
+      </textarea>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

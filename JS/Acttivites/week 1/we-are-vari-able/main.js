@@ -13,6 +13,8 @@ var mySum = 2358;
 var myProduct = 4992;
 var myHeightAndAge = myHeight + myAge; // 5.10 + 32 = 37.1
 
+let welcome = "Welcome to "+ myFirstName + "'s world!";
+
 /*********************************************************************************************************************
 
  * CODE BELOW HERE IS FOR INTERNAL USE ONLY! IT ENSURES THAT THE TESTING *

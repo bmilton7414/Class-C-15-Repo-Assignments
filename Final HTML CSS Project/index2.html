@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name • Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+<script src="CodeCampTester.js"></script>
+  <!-- NAVBAR at the very top -->
+  <nav id="navbar" class="site-header">
+    <div class="container header-top">
+      <div class="header-left">
+        <img src="Assets/logo.png" alt="Your Logo" class="logo" />
+        <h1 class="site-title">Your Name</h1>
+      </div>
+      <div class="header-nav">
+        <a href="#welcome-section">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+        <a id="profile-link" href="https://github.com/YourUser" target="_blank" rel="noopener">Profile</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+    <div class="container header-bottom">
+      <p class="subtitle">Crafting beautiful, responsive web experiences</p>
+    </div>
+  </nav>
+
+  <!-- WELCOME SECTION -->
+  <section id="welcome-section">
+    <h1>Welcome to My Portfolio</h1>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="container main-content">
+    <section id="about" class="section">
+      <div class="section-label"><span>About</span><span>Me</span></div>
+      <div class="section-content">
+        <p>Hi, I’m <strong>Your Name</strong>. I build responsive, accessible websites with HTML, CSS, and JavaScript. Explore my work below!</p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-label"><span>Work</span></div>
+      <div class="section-content">
+        <div class="projects-grid">
+          <a href="tribute_page/index.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Tribute Page Preview" />
+            <div class="project-info">
+              <h3>Tribute Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <!-- copy above block for other projects -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-label"><span>Contact</span><span>Me</span></div>
+      <div class="section-content">
+        <ul class="contact-list">
+          <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
+          <li>Phone: <a href="tel:+15555555555">555-555-5555</a></li>
+          <li>GitHub: <a href="https://github.com/YourUser" target="_blank" rel="noopener">YourUser</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2025 Your Name • Built with &amp; CSS Variables</p>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to Top">↑</button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme toggle
+    const btn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      btn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    const welcomeHeight = window.innerHeight;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > welcomeHeight) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>

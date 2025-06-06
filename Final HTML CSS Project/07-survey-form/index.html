@@ -1,0 +1,112 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    
+    <style>
+        body.night-mode {
+            background-color: #2e2e2e;
+            color: white;
+        }
+
+        body.night-mode form {
+            background-color: #1e3a5f;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        #mode-switcher {
+            margin-bottom: 20px;
+            background-color: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #mode-switcher:hover {
+            background-color: #3a5f7d;
+        }
+    </style>
+</head>
+<body>
+    <script src="CodeCampTester.js"></script>
+
+    <!-- Night Mode Button -->
+    <button id="mode-switcher" onclick="switchMode()">Switch to Night Mode</button>
+    
+    <h1 id="title">Survey Page</h1>
+
+    <p id="description">This survey page contains an introduction and demonstrates basic HTML structure.</p>
+
+    <form id="survey-form">
+        <!-- Name -->
+        <label id="name-label" for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="e.g. John Doe">
+
+        <!-- Email -->
+        <label id="email-label" for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+        <!-- Number -->
+        <label id="number-label" for="number">Phone:</label>
+        <input type="number" id="number" name="number" min="1" max="100000000" required placeholder="555-555-5555">
+
+        <!-- Dropdown -->
+        <label for="dropdown">Select your role:</label>
+        <select id="dropdown" name="role">
+            <option value="student">Student</option>
+            <option value="professional">Professional</option>
+        </select>
+
+        <!-- Radio buttons -->
+        <p>Preferred Contact Method:</p>
+        <input type="radio" id="contact-email" name="contact-method" value="email">
+        <label for="contact-email">Email</label><br>
+
+        <input type="radio" id="contact-phone" name="contact-method" value="phone">
+        <label for="contact-phone">Phone</label><br>
+
+        <!-- Checkboxes -->
+        <p>Select your interests:</p>
+        <input type="checkbox" id="interest-html" name="interests" value="html">
+        <label for="interest-html">HTML</label><br>
+
+        <input type="checkbox" id="interest-css" name="interests" value="css">
+        <label for="interest-css">CSS</label><br>
+
+        <input type="checkbox" id="interest-js" name="interests" value="javascript">
+        <label for="interest-js">JavaScript</label><br>
+
+        <!-- Textarea -->
+        <p>Additional Comments:</p>
+        <textarea id="comments" name="comments" rows="4" cols="40" placeholder="Enter any additional comments here..."></textarea><br><br>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <!-- JavaScript to switch modes -->
+    <script>
+        function switchMode() {
+            document.body.classList.toggle("night-mode");
+            const button = document.getElementById("mode-switcher");
+            if (document.body.classList.contains("night-mode")) {
+                button.textContent = "Switch to Day Mode";
+            } else {
+                button.textContent = "Switch to Night Mode";
+            }
+        }
+    </script>
+</body>
+</html>
+
+

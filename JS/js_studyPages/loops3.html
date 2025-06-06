@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Array, String & Loop Methods Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    h3 {
+      margin: 10px 0 5px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Array, String & Loop Methods Examples</h1>
+
+    <!-- Introduction Section -->
+    <div class="example">
+      <h2>Introduction: Why and How Arrays, Strings & Loops Work</h2>
+
+      <h3>Why It Matters</h3>
+      <p>
+        Arrays, strings, and loops form the backbone of data manipulation in JavaScript. Understanding how they work allows you to:
+        <ul>
+          <li>Store and manage collections of data efficiently.</li>
+          <li>Perform operations on every element without repetitive code.</li>
+          <li>Transform, filter, and reduce datasets to derive useful information.</li>
+          <li>Write cleaner, more maintainable code by leveraging built-in methods.</li>
+        </ul>
+      </p>
+
+      <h3>Quick Rules of Thumb</h3>
+      <ul>
+        <li>
+          Use <code>forEach</code>, <code>map</code>, <code>filter</code>, <code>reduce</code> for array transformations instead of manual <code>for</code> loops when readability matters.
+        </li>
+        <li>
+          Always pay attention to whether a method mutates the original array (e.g., <code>sort</code>, <code>splice</code>) or returns a new one (e.g., <code>slice</code>, <code>concat</code>).
+        </li>
+        <li>
+          When working with strings, remember methods like <code>slice</code> and <code>substring</code> do not modify the original string, but return a new one.
+        </li>
+        <li>
+          Choose <code>for...of</code> when you need the values directly, and <code>for...in</code> for object property enumeration; avoid using <code>for...in</code> on arrays to prevent unexpected index strings.
+        </li>
+      </ul>
+
+      <h3>Final Tips</h3>
+      <ul>
+        <li>
+          Always check method return values—some array methods return new arrays, while others modify in place.
+        </li>
+        <li>
+          Use <code>const</code> when declaring arrays and strings you don’t intend to reassign; you can still mutate contents.
+        </li>
+        <li>
+          Avoid unnecessary loops by leveraging higher-order methods; they improve both performance and readability.
+        </li>
+        <li>
+          Remember string methods like <code>trim</code> help sanitize user input before processing.
+        </li>
+      </ul>
+    </div>
+<div class="container">
+    <h1>JavaScript Array, String & Loop Methods Examples</h1>
+
+    <!-- Example 1: forEach Method -->
+    <div class="example">
+      <h2>Example 1: forEach Method</h2>
+      <p>
+        The <code>forEach</code> method executes a provided function once for
+        each array element.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Create an array with 5 numbers
+let array = [1, 2, 3, 4, 5];
+
+// Step 2: Use the forEach method to iterate through each element of the array
+array.forEach(item => {
+  // Step 3: Log each element to the console
+  console.log(item);
+});
+
+// Explanation:
+// - forEach is a method that iterates over each element of the array
+// - The callback function takes each element (item) and logs it to the console
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        In this example, the <code>forEach</code> method is used to iterate
+        through each element of the <code>array</code> and log each element to
+        the console using <code>console.log</code>.
+      </p>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: typeof Operator -->
+    <div class="example">
+      <h2>Example 2: typeof Operator</h2>
+      <p>
+        The <code>typeof</code> operator returns a string indicating the type
+        of a variable.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Declare a variable x and assign it a value of 42
+let x = 42;
+
+// Step 2: Use the typeof operator to determine the type of x
+console.log(typeof x); // Output: number
+
+// Explanation:
+// - typeof is an operator that returns a string indicating the type of the operand
+// - In this case, the type of x is "number"
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates the usage of the <code>typeof</code>
+        operator to determine the data type of the variable <code>x</code>,
+        which is a number.
+      </p>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: sort Method -->
+    <div class="example">
+      <h2>Example 3: sort Method</h2>
+      <p>
+        The <code>sort</code> method sorts the elements of an array in place
+        and returns the sorted array.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Create an array of fruits
+let fruits = ['Banana', 'Orange', 'Apple'];
+
+// Step 2: Use the sort method to sort the array alphabetically
+fruits.sort();
+
+// Step 3: Log the sorted array to the console
+console.log(fruits); // Output: ["Apple", "Banana", "Orange"]
+
+// Explanation:
+// - sort is a method that sorts the elements of an array in place
+// - In this case, the elements are strings and are sorted alphabetically
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>sort</code> method to
+        alphabetically sort an array of strings (<code>fruits</code> in this
+        case).
+      </p>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Array length Property -->
+    <div class="example">
+      <h2>Example 4: Array length Property</h2>
+      <p>
+        The <code>length</code> property returns the number of elements in an
+        array.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the length property to get the number of elements in the array
+console.log(numbers.length); // Output: 5
+
+// Explanation:
+// - length is a property of arrays that returns the number of elements in the array
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use the <code>length</code> property to
+        obtain the number of elements in the <code>numbers</code> array.
+      </p>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: toString Method -->
+    <div class="example">
+      <h2>Example 5: toString Method</h2>
+      <p>
+        The <code>toString</code> method returns a string representing the
+        specified array and its elements.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the toString method to convert the array to a string
+console.log(numbers.toString()); // Output: "1,2,3,4,5"
+
+// Explanation:
+// - toString is a method that converts an array to a string
+// - The elements are separated by commas
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>toString</code> method
+        to convert the <code>numbers</code> array into a comma-separated
+        string representation.
+      </p>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: join Method -->
+    <div class="example">
+      <h2>Example 6: join Method</h2>
+      <p>
+        The <code>join</code> method joins all elements of an array into a
+        string and returns this string.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the join method to convert the array to a string with a separator
+console.log(numbers.join('-')); // Output: "1-2-3-4-5"
+
+// Explanation:
+// - join is a method that converts an array to a string
+// - The elements are separated by the specified separator (in this case, a hyphen)
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>join</code> method to
+        convert the <code>numbers</code> array into a string with a specified
+        separator (a hyphen in this case).
+      </p>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: concat Method -->
+    <div class="example">
+      <h2>Example 7: concat Method</h2>
+      <p>
+        The <code>concat</code> method merges two or more arrays and returns
+        a new array.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Create two arrays of numbers
+let array1 = [1, 2, 3];
+let array2 = [4, 5, 6];
+
+// Step 2: Use the concat method to merge the arrays
+let mergedArray = array1.concat(array2);
+
+// Step 3: Log the merged array to the console
+console.log(mergedArray); // Output: [1, 2, 3, 4, 5, 6]
+
+// Explanation:
+// - concat is a method that merges two or more arrays
+// - It returns a new array that contains all elements of the merged arrays
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>concat</code> method to
+        merge two arrays (<code>array1</code> and <code>array2</code>) into a
+        new array (<code>mergedArray</code>).
+      </p>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: map Method -->
+    <div class="example">
+      <h2>Example 8: map Method</h2>
+      <p>
+        The <code>map</code> method creates a new array populated with the
+        results of calling a provided function on every element in the
+        calling array.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the map method to create a new array with each element doubled
+let doubledNumbers = numbers.map(item => item * 2);
+
+// Step 3: Log the new array to the console
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+
+// Explanation:
+// - map is a method that creates a new array by applying a function to each element of the original array
+// - In this case, each element is doubled
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>map</code> method to
+        create a new array (<code>doubledNumbers</code>) by doubling each
+        element of the <code>numbers</code> array.
+      </p>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: filter Method -->
+    <div class="example">
+      <h2>Example 9: filter Method</h2>
+      <p>
+        The <code>filter</code> method creates a new array with all elements
+        that pass the test implemented by the provided function.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the filter method to create a new array with only even numbers
+let evenNumbers = numbers.filter(item => item % 2 === 0);
+
+// Step 3: Log the new array to the console
+console.log(evenNumbers); // Output: [2, 4]
+
+// Explanation:
+// - filter is a method that creates a new array with all elements that pass the test implemented by the provided function
+// - In this case, the test is whether the element is even
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>filter</code> method to
+        create a new array (<code>evenNumbers</code>) that contains only the
+        even elements of the <code>numbers</code> array.
+      </p>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: reduce Method -->
+    <div class="example">
+      <h2>Example 10: reduce Method</h2>
+      <p>
+        The <code>reduce</code> method executes a reducer function (that you
+        provide) on each element of the array, resulting in a single output
+        value.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use the reduce method to calculate the sum of the array elements
+let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+// Step 3: Log the sum to the console
+console.log(sum); // Output: 15
+
+// Explanation:
+// - reduce is a method that executes a reducer function on each element of the array, resulting in a single output value
+// - The reducer function takes two arguments: accumulator and currentValue
+// - In this case, the reducer function adds each element to the accumulator, starting with an initial value of 0
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use the <code>reduce</code> method to
+        calculate the sum of the elements in the <code>numbers</code> array.
+      </p>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+    <!-- Example 11: push, pop, shift, unshift Methods -->
+    <div class="example">
+      <h2>Example 11: push, pop, shift, unshift Methods</h2>
+      <p>
+        The <code>push</code> method adds one or more elements to the end of an
+        array; <code>pop</code> removes the last element. <code>shift</code>
+        removes the first element, and <code>unshift</code> adds one or more
+        elements to the beginning of an array.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example11-code">
+// Step 1: Create an array of numbers
+let nums = [10, 20, 30];
+
+// Step 2: Use push to add elements to the end
+nums.push(40, 50);
+console.log("After push:", nums); // [10, 20, 30, 40, 50]
+
+// Step 3: Use pop to remove the last element
+let removedLast = nums.pop();
+console.log("Popped:", removedLast); // 50
+console.log("After pop:", nums); // [10, 20, 30, 40]
+
+// Step 4: Use shift to remove the first element
+let removedFirst = nums.shift();
+console.log("Shifted:", removedFirst); // 10
+console.log("After shift:", nums); // [20, 30, 40]
+
+// Step 5: Use unshift to add elements to the beginning
+nums.unshift(5, 15);
+console.log("After unshift:", nums); // [5, 15, 20, 30, 40]
+
+// Explanation:
+// - push adds items to the end
+// - pop removes and returns the last item
+// - shift removes and returns the first item
+// - unshift adds items to the beginning
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to modify the beginning and end of an
+        array using <code>push</code>, <code>pop</code>, <code>shift</code>, and
+        <code>unshift</code>.
+      </p>
+      <div class="console-output" id="example11-console"></div>
+      <button class="run-button" data-example-id="example11">
+        Run Example 11
+      </button>
+    </div>
+
+    <!-- Example 12: slice and splice Methods -->
+    <div class="example">
+      <h2>Example 12: slice and splice Methods</h2>
+      <p>
+        The <code>slice</code> method returns a shallow copy of a portion of an
+        array into a new array. The <code>splice</code> method changes the
+        contents of an array by removing or replacing existing elements and/or
+        adding new elements in place.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example12-code">
+// Step 1: Create an array of 5 elements
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// Step 2: Use slice to copy elements from index 1 to 3 (excluding index 3)
+let slicedArr = arr.slice(1, 3);
+console.log("Sliced (1,3):", slicedArr); // ["b", "c"]
+console.log("Original array:", arr); // ["a", "b", "c", "d", "e"]
+
+// Step 3: Use splice to remove and/or add elements
+// Remove 2 elements from index 2, and insert 'X', 'Y'
+let removed = arr.splice(2, 2, 'X', 'Y');
+console.log("Removed by splice:", removed); // ["c", "d"]
+console.log("After splice:", arr); // ["a", "b", "X", "Y", "e"]
+
+// Explanation:
+// - slice does not modify original array, returns new array
+// - splice modifies the original array, can remove and/or add elements
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use <code>slice</code> to create a copy of a
+        part of an array and <code>splice</code> to modify the original array by
+        removing and adding elements.
+      </p>
+      <div class="console-output" id="example12-console"></div>
+      <button class="run-button" data-example-id="example12">
+        Run Example 12
+      </button>
+    </div>
+
+    <!-- Example 13: indexOf and includes Methods -->
+    <div class="example">
+      <h2>Example 13: indexOf and includes Methods</h2>
+      <p>
+        The <code>indexOf</code> method returns the first index at which a
+        given element can be found in an array; <code>includes</code> determines
+        whether an array includes a certain element, returning <code>true</code>
+        or <code>false</code>.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example13-code">
+// Step 1: Create an array of strings
+let items = ['apple', 'banana', 'cherry'];
+
+// Step 2: Use indexOf to find the position of an element
+let idx = items.indexOf('banana');
+console.log("Index of 'banana':", idx); // 1
+
+let missingIdx = items.indexOf('grape');
+console.log("Index of 'grape':", missingIdx); // -1
+
+// Step 3: Use includes to check for the presence of an element
+console.log("Includes 'cherry'?", items.includes("cherry")); // true
+console.log("Includes 'grape'?", items.includes("grape")); // false
+
+// Explanation:
+// - indexOf returns first index or -1 if not found
+// - includes returns true/false if element is in array
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to find an element's index in an array
+        using <code>indexOf</code> and check for its existence with
+        <code>includes</code>.
+      </p>
+      <div class="console-output" id="example13-console"></div>
+      <button class="run-button" data-example-id="example13">
+        Run Example 13
+      </button>
+    </div>
+
+    <!-- Example 14: some and every Methods -->
+    <div class="example">
+      <h2>Example 14: some and every Methods</h2>
+      <p>
+        The <code>some</code> method tests whether at least one element in the
+        array passes the provided test; <code>every</code> tests whether all
+        elements pass the provided test.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example14-code">
+// Step 1: Create an array of numbers
+let nums = [2, 4, 6, 8, 10];
+
+// Step 2: Use some to check if any element is odd
+let hasOdd = nums.some(item => item % 2 !== 0);
+console.log("Has odd number?", hasOdd); // false
+
+// Step 3: Use every to check if all elements are even
+let allEven = nums.every(item => item % 2 === 0);
+console.log("All even?", allEven); // true
+
+// Explanation:
+// - some returns true if any element passes the test
+// - every returns true only if all elements pass the test
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use <code>some</code> to detect if any item
+        meets a condition and <code>every</code> to verify if all items meet a
+        condition.
+      </p>
+      <div class="console-output" id="example14-console"></div>
+      <button class="run-button" data-example-id="example14">
+        Run Example 14
+      </button>
+    </div>
+
+    <!-- Example 15: for Loop -->
+    <div class="example">
+      <h2>Example 15: for Loop</h2>
+      <p>
+        The <code>for</code> loop repeats a block of code a specified number of
+        times.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example15-code">
+// Step 1: Create an array of numbers
+let numbers = [1, 2, 3, 4, 5];
+
+// Step 2: Use a for loop to iterate over the array and log each element
+for (let i = 0; i < numbers.length; i++) {
+  console.log("Index", i, "Value", numbers[i]);
+}
+
+// Explanation:
+// - The loop runs from i = 0 to i < numbers.length
+// - Each iteration accesses numbers[i] and logs it
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates a traditional <code>for</code> loop to iterate
+        over an array and log the index and value of each element.
+      </p>
+      <div class="console-output" id="example15-console"></div>
+      <button class="run-button" data-example-id="example15">
+        Run Example 15
+      </button>
+    </div>
+
+    <!-- Example 16: while Loop -->
+    <div class="example">
+      <h2>Example 16: while Loop</h2>
+      <p>
+        The <code>while</code> loop repeats a block of code as long as a
+        specified condition is true.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example16-code">
+// Step 1: Initialize a counter
+let count = 1;
+
+// Step 2: Use a while loop to log numbers from 1 to 5
+while (count <= 5) {
+  console.log("Count is:", count);
+  count++;
+}
+
+// Explanation:
+// - The loop runs while count <= 5
+// - The counter is incremented each iteration
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example uses a <code>while</code> loop to output numbers from 1 to
+        5 by incrementing a counter until the condition becomes false.
+      </p>
+      <div class="console-output" id="example16-console"></div>
+      <button class="run-button" data-example-id="example16">
+        Run Example 16
+      </button>
+    </div>
+
+    <!-- Example 17: do...while Loop -->
+    <div class="example">
+      <h2>Example 17: do...while Loop</h2>
+      <p>
+        The <code>do...while</code> loop executes a block of code once, then
+        repeats it as long as a specified condition is true.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example17-code">
+// Step 1: Initialize a counter
+let num = 1;
+
+// Step 2: Use do...while to log numbers from 1 to 5
+do {
+  console.log("Number is:", num);
+  num++;
+} while (num <= 5);
+
+// Explanation:
+// - The code block runs at least once, then checks the condition num <= 5
+// - Continues until the condition is false
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how a <code>do...while</code> loop ensures the code
+        runs at least once before testing the condition.
+      </p>
+      <div class="console-output" id="example17-console"></div>
+      <button class="run-button" data-example-id="example17">
+        Run Example 17
+      </button>
+    </div>
+
+    <!-- Example 18: for...of Loop -->
+    <div class="example">
+      <h2>Example 18: for...of Loop</h2>
+      <p>
+        The <code>for...of</code> loop iterates over iterable objects
+        (arrays, strings, etc.) and provides the values directly.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example18-code">
+// Step 1: Create an array of fruits
+let fruits = ['Apple', 'Banana', 'Cherry'];
+
+// Step 2: Use for...of to iterate over the array
+for (let fruit of fruits) {
+  console.log("Fruit:", fruit);
+}
+
+// Step 3: Use for...of to iterate over a string
+let greeting = "Hello";
+for (let char of greeting) {
+  console.log("Character:", char);
+}
+
+// Explanation:
+// - for...of iterates over values in an iterable (array or string)
+// - Simplifies accessing each element/character directly
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how <code>for...of</code> loops over arrays
+        and strings, giving direct access to each element or character.
+      </p>
+      <div class="console-output" id="example18-console"></div>
+      <button class="run-button" data-example-id="example18">
+        Run Example 18
+      </button>
+    </div>
+
+    <!-- Example 19: for...in Loop -->
+    <div class="example">
+      <h2>Example 19: for...in Loop</h2>
+      <p>
+        The <code>for...in</code> loop iterates over the enumerable properties
+        of an object.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example19-code">
+// Step 1: Create an object representing a user
+let user = {
+  name: "Alice",
+  age: 30,
+  city: "New York"
+};
+
+// Step 2: Use for...in to iterate over object properties
+for (let key in user) {
+  console.log(key + ":", user[key]);
+}
+
+// Explanation:
+// - for...in iterates over the keys (property names) of an object
+// - Access the value using user[key]
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use <code>for...in</code> to loop through the
+        properties of an object and log the key-value pairs.
+      </p>
+      <div class="console-output" id="example19-console"></div>
+      <button class="run-button" data-example-id="example19">
+        Run Example 19
+      </button>
+    </div>
+
+    <!-- Example 20: String Methods (toUpperCase, toLowerCase, indexOf, includes) -->
+    <div class="example">
+      <h2>Example 20: String Methods</h2>
+      <p>
+        Common string methods include <code>toUpperCase</code>,
+        <code>toLowerCase</code>, <code>indexOf</code>, and
+        <code>includes</code>.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example20-code">
+// Step 1: Create a string
+let str = "  Hello World  ";
+
+// Step 2: toUpperCase and toLowerCase
+console.log("Uppercase:", str.toUpperCase()); // "  HELLO WORLD  "
+console.log("Lowercase:", str.toLowerCase()); // "  hello world  "
+
+// Step 3: indexOf finds the position of a substring
+console.log("Index of 'World':", str.indexOf("World")); // 8
+
+// Step 4: includes checks if substring exists
+console.log("Includes 'Hello'?", str.includes("Hello")); // true
+console.log("Includes 'world'?", str.includes("world")); // false (case-sensitive)
+
+// Step 5: trim removes whitespace from both ends
+console.log("Trimmed string:", str.trim()); // "Hello World"
+
+// Explanation:
+// - toUpperCase converts all characters to uppercase
+// - toLowerCase converts all characters to lowercase
+// - indexOf returns the starting index of the substring or -1 if not found
+// - includes returns true/false depending on whether substring is found
+// - trim removes leading and trailing whitespace
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to transform string case, find
+        substrings, check existence of substrings, and remove extra whitespace.
+      </p>
+      <div class="console-output" id="example20-console"></div>
+      <button class="run-button" data-example-id="example20">
+        Run Example 20
+      </button>
+    </div>
+
+    <!-- Example 21: String Methods (slice, substring, split, replace, startsWith, endsWith) -->
+    <div class="example">
+      <h2>Example 21: Additional String Methods</h2>
+      <p>
+        More string methods include <code>slice</code>, <code>substring</code>,
+        <code>split</code>, <code>replace</code>, <code>startsWith</code>, and
+        <code>endsWith</code>.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example21-code">
+// Step 1: Create a string
+let text = "JavaScript is awesome";
+
+// Step 2: slice and substring
+console.log("slice(0,10):", text.slice(0, 10));       // "JavaScript"
+console.log("substring(0,10):", text.substring(0, 10)); // "JavaScript"
+
+// Step 3: split into array by spaces
+let words = text.split(" ");
+console.log("Words array:", words); // ["JavaScript", "is", "awesome"]
+
+// Step 4: replace a substring
+let newText = text.replace("awesome", "fun");
+console.log("Replaced text:", newText); // "JavaScript is fun"
+
+// Step 5: startsWith and endsWith
+console.log("Starts with 'Java'?", text.startsWith("Java")); // true
+console.log("Ends with 'awesome'?", text.endsWith("awesome")); // true
+
+// Explanation:
+// - slice and substring extract parts of the string (slightly different behaviors)
+// - split breaks the string into an array based on a separator
+// - replace substitutes a specified substring
+// - startsWith and endsWith check how the string begins/ends
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to extract substrings, split a string into an
+        array, replace parts of a string, and check its start/end patterns.
+      </p>
+      <div class="console-output" id="example21-console"></div>
+      <button class="run-button" data-example-id="example21">
+        Run Example 21
+      </button>
+    </div>
+
+        <!-- Example 22: Additional Array Methods -->
+    <div class="example">
+      <h2>Example 22: Additional Array Methods</h2>
+      <p>
+        This example demonstrates several other commonly used array methods:
+        <code>find</code>, <code>findIndex</code>, <code>includes</code>,
+        <code>reverse</code>, <code>sort</code>, <code>fill</code>,
+        <code>flat</code>, <code>flatMap</code>, <code>copyWithin</code>,
+        and <code>entries</code>.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example22-code">
+// Step 1: Create an array of objects
+let users = [
+  { id: 1, name: "Alice", age: 30 },
+  { id: 2, name: "Bob", age: 25 },
+  { id: 3, name: "Charlie", age: 35 },
+  { id: 4, name: "Dana", age: 25 }
+];
+
+// Step 2: find – returns the first element that matches the condition
+let firstAge25 = users.find(user => user.age === 25);
+console.log("First user age 25:", firstAge25);
+
+// Step 3: findIndex – returns the index of the first element that matches
+let indexCharlie = users.findIndex(user => user.name === "Charlie");
+console.log("Index of Charlie:", indexCharlie);
+
+// Step 4: includes – checks if a primitive value exists
+let numbers = [1, 2, 3, 4, 5];
+console.log("Includes 3?", numbers.includes(3));       // true
+console.log("Includes 7?", numbers.includes(7));       // false
+
+// Step 5: reverse – reverses the array in place
+let revNumbers = [...numbers]; // copy to avoid mutating original
+revNumbers.reverse();
+console.log("Reversed numbers:", revNumbers);
+
+// Step 6: sort – sorts an array; default sorts as strings
+let fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+fruits.sort();
+console.log("Sorted fruits:", fruits);
+
+// Sorting numbers correctly:
+let nums = [10, 2, 5, 1, 20];
+nums.sort((a, b) => a - b);
+console.log("Numerically sorted:", nums);
+
+// Step 7: fill – fills elements with a static value
+let filled = Array(5).fill(0);
+console.log("Filled array:", filled);
+
+// Step 8: flat – flattens nested arrays one level by default
+let nested = [1, [2, [3, 4]], 5];
+let flatOnce = nested.flat();
+console.log("Flat once:", flatOnce);         // [1, 2, [3, 4], 5]
+let flatTwice = nested.flat(2);
+console.log("Flat twice:", flatTwice);       // [1, 2, 3, 4, 5]
+
+// Step 9: flatMap – maps each element then flattens result
+let sentences = ["Hello world", "Foo bar"];
+let words = sentences.flatMap(s => s.split(" "));
+console.log("FlatMap result:", words);
+
+// Step 10: copyWithin – copies a sequence of elements within the array
+let letters = ['a', 'b', 'c', 'd', 'e'];
+letters.copyWithin(1, 3, 5);
+// copy elements from index 3–4 ("d","e") to start at index 1
+console.log("After copyWithin:", letters);
+
+// Step 11: entries – returns an iterator of [index, value] pairs
+let arr = ['x', 'y', 'z'];
+for (let [index, value] of arr.entries()) {
+  console.log("Entry:", index, value);
+}
+
+// Explanation:
+// - find returns first element matching a predicate.
+// - findIndex returns index of first matching element, or -1.
+// - includes checks for primitive membership, returns true/false.
+// - reverse and sort mutate the array in place; clone first if preserving original.
+// - sort without compareFn sorts elements as strings; provide (a,b)=>a-b for numbers.
+// - fill sets every element in an array to a static value.
+// - flat flattens nested arrays; flatMap maps then flattens in one pass.
+// - copyWithin copies part of an array to another location in the same array.
+// - entries returns an iterator of [index, value] pairs to loop through.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to:
+        <ul>
+          <li>
+            Use <code>find</code> and <code>findIndex</code> on an array of objects
+            to locate elements by a condition.
+          </li>
+          <li>
+            Check for primitive presence with <code>includes</code>.
+          </li>
+          <li>
+            Reverse and sort arrays in place, and how to sort numbers versus strings.
+          </li>
+          <li>
+            Populate an array with a uniform value using <code>fill</code>.
+          </li>
+          <li>
+            Flatten nested arrays one or more levels with <code>flat</code> or
+            transform-then-flatten with <code>flatMap</code>.
+          </li>
+          <li>
+            Copy a subsequence of elements within the same array via
+            <code>copyWithin</code>.
+          </li>
+          <li>
+            Iterate index-value pairs using <code>entries</code>.
+          </li>
+        </ul>
+      </p>
+      <div class="console-output" id="example22-console"></div>
+      <button class="run-button" data-example-id="example22">
+        Run Example 22
+      </button>
+    </div>
+
+    <script>
+      document.querySelectorAll('.run-button').forEach(button => {
+        button.addEventListener('click', () => {
+          const exampleId = button.getAttribute('data-example-id');
+          const code = document.getElementById(`${exampleId}-code`).value;
+          const consoleOutput = document.getElementById(`${exampleId}-console`);
+          consoleOutput.innerHTML = '';
+
+          try {
+            const originalConsole = console.log;
+            console.log = function(...args) {
+              args.forEach(arg => {
+                let formatted;
+                if (typeof arg === 'object' && arg !== null) {
+                  formatted = JSON.stringify(arg, function(key, value) {
+                    if (typeof value === 'function') {
+                      return value.toString();
+                    }
+                    return value;
+                  }, 2);
+                } else {
+                  formatted = arg;
+                }
+                consoleOutput.innerHTML += formatted + '\n';
+              });
+            };
+            eval(code);
+            console.log = originalConsole;
+          } catch (error) {
+            console.log = originalConsole;
+            consoleOutput.innerHTML = 'Error: ' + error.message;
+          }
+        });
+      });
+    </script>
+
+
+    <!-- Additional Section: Why & How It Works, Why It Matters, Quick Rules, Final Tips -->
+    <div class="example">
+      <h2>Why & How It Works</h2>
+      <p>
+        Understanding array, string, and loop methods in JavaScript is key to writing concise, readable, and efficient code. 
+        These methods are built into the language to manipulate data structures and control flow in a predictable way.
+      </p>
+      <p>
+        <strong>How It Works:</strong>
+        <ul>
+          <li>
+            <code>Array.prototype</code> methods like <code>forEach</code>, <code>map</code>, <code>filter</code>, and <code>reduce</code> work by internally looping over each element, applying a callback function, and returning results in a new array or single value.
+          </li>
+          <li>
+            <code>String.prototype</code> methods like <code>toUpperCase</code>, <code>slice</code>, and <code>split</code> create and return new string values without mutating the original string (strings are immutable).
+          </li>
+          <li>
+            Loop constructs (<code>for</code>, <code>while</code>, <code>for...of</code>, <code>for...in</code>) provide explicit control over iteration, indexing, and enumeration of array elements or object properties.
+          </li>
+        </ul>
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        Mastery of these methods and loops allows developers to:
+        <ul>
+          <li>
+            Write <strong>declarative</strong> code that is easier to read and maintain (e.g., <code>array.map(...)</code> vs manual <code>for</code> loop).
+          </li>
+          <li>
+            Perform <strong>functional transformations</strong> on data with minimal side effects (e.g., <code>filter</code> to create subsets).
+          </li>
+          <li>
+            <strong>Optimize performance</strong> by choosing methods that avoid unnecessary allocations or expensive lookups (e.g., chaining <code>map</code> and <code>filter</code>).
+          </li>
+          <li>
+            Avoid common pitfalls like off-by-one errors or infinite loops by using well-defined loop constructs and built-in methods.
+          </li>
+        </ul>
+      </p>
+
+      <h2>Quick Rules of Thumb</h2>
+      <ul>
+        <li><code>forEach</code> vs <code>map</code>: Use <code>forEach</code> when you only need side effects (e.g., logging). Use <code>map</code> when you need a new transformed array.</li>
+        <li><code>filter</code> vs <code>find</code>: Use <code>filter</code> to return all matching elements in an array; use <code>find</code> to return the first matching element.</li>
+        <li>Avoid mutating arrays inside <code>map</code> or <code>filter</code> callbacks. If you need to modify the original array, use loop constructs or <code>splice</code> explicitly.</li>
+        <li>Prefer <code>for...of</code> when you need to iterate over values directly; use <code>for...in</code> only for object properties.</li>
+        <li>String methods do not mutate the original string. Always assign the return value to a new variable if you need to keep changes.</li>
+        <li>Use <code>const</code> for arrays and strings that shouldn’t be re-assigned, and <code>let</code> for counters or indices that change.</li>
+      </ul>
+
+      <h2>Final Tips</h2>
+      <ul>
+        <li>
+          <strong>Chain thoughtfully:</strong> When chaining array methods (e.g., <code>array.filter(...).map(...).reduce(...)</code>), be mindful of performance: each method creates a new array. Sometimes a single <code>for</code> loop is more efficient for large datasets.
+        </li>
+        <li>
+          <strong>Handle empties and edge cases:</strong> Verify behavior when arrays are empty (e.g., <code>reduce</code> without an initial value throws an error). Use default parameters or initial values accordingly.
+        </li>
+        <li>
+          <strong>Know when to step outside built-ins:</strong> Some complex transformations may be clearer using explicit loops rather than chaining many methods—prioritize readability.
+        </li>
+        <li>
+          <strong>Profile if needed:</strong> For performance-critical code, measure time differences between built-in array methods and traditional loops, especially in tight loops or large data volumes.
+        </li>
+        <li>
+          <strong>Readability over cleverness:</strong> While concise one-liners are tempting, ensure your code is easily understood by others (and your future self).
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+   

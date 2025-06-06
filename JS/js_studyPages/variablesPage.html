@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Variables Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Variables Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: JavaScript Variables & Types</h2>
+      <p>
+        JavaScript variables can hold different types of values. At runtime, the type of a variable can change dynamically. Below is a brief list:
+      </p>
+      <ul>
+        <li><strong>Primitives:</strong> number, string, boolean, null, undefined, symbol</li>
+        <li><strong>Objects:</strong> object, array, function, etc.</li>
+      </ul>
+      <p>
+        Understanding variable behavior—including hoisting, the Temporal Dead Zone (TDZ), and variable scope—is essential for writing bug-free code.
+      </p>
+      <p><strong>Fun Fact:</strong> In JavaScript, arrays are just specialized objects. Their indices are keys that happen to be non-negative integers, and the <code>.length</code> property automatically updates based on the highest numeric index. For example:
+      </p>
+      <pre style="background-color: #eee; padding: 10px; border-radius: 4px; overflow-x: auto;">
+const weird = [];
+weird[5] = "hello";
+console.log(weird);           // [ <5 empty items>, 'hello' ]
+console.log(weird.length);    // 6
+      </pre>
+      <p>
+        Even though you only assigned to index 5, the array’s length becomes 6.
+      </p>
+    </div>
+
+    <!-- Example 1: var Declaration -->
+    <div class="example">
+      <h2>Example 1: <code>var</code> Declaration & Hoisting</h2>
+      <p>
+        The <code>var</code> keyword declares a function-scoped or globally-scoped variable. Variables declared with <code>var</code> are hoisted to the top of their scope and initialized with <code>undefined</code>, allowing re-declaration and update.
+      </p>
+      <p><strong>How Hoisting Works:</strong></p>
+      <p>
+        During the compilation phase, JavaScript moves all <code>var</code> declarations to the top of their function or global scope and sets them to <code>undefined</code>. This means you can reference a <code>var</code> variable before its actual declaration line without a ReferenceError, but you’ll get <code>undefined</code> instead of its assigned value.
+      </p>
+      <p><strong>Why Hoisting Matters:</strong></p>
+      <ul>
+        <li>Prevents ReferenceError if you reference a <code>var</code> before declaration (gives <code>undefined</code> instead).</li>
+        <li>Can lead to unexpected bugs if you think a variable is not defined yet but it is hoisted as <code>undefined</code>.</li>
+      </ul>
+      <p><strong>Quick Rules of Thumb:</strong></p>
+      <ul>
+        <li>Use <code>var</code> only if you need function-scoped variables; prefer <code>let</code>/<code>const</code> for block scoping.</li>
+        <li>Remember that <code>var</code> can be re-declared without error in the same scope.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>Avoid mixing <code>var</code> with <code>let</code>/<code>const</code> in the same scope to reduce confusion.</li>
+        <li>Always initialize variables at declaration to minimize hoisting issues.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: var hoisting demonstration
+console.log("Hoisted var x before declaration:", x); // Output: undefined
+var x = 50;
+console.log("Var x after declaration:", x); // Output: 50
+
+// Step 2: var inside a function (function-scoped)
+function varScope() {
+  console.log("Hoisted inside function (a):", a); // undefined
+  var a = 1;
+  if (true) {
+    var a = 2; // same variable, function-scoped
+    console.log("Inside if (var):", a); // Output: 2
+  }
+  console.log("Outside if (var):", a); // Output: 2
+}
+varScope();
+
+// Explanation:
+// - 'x' is hoisted and initialized to undefined at compile time.
+// - 'a' inside varScope is also hoisted within the function scope.
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: let Declaration & TDZ -->
+    <div class="example">
+      <h2>Example 2: <code>let</code> Declaration & Temporal Dead Zone (TDZ)</h2>
+      <p>
+        The <code>let</code> keyword declares a block-scoped variable. Variables declared with <code>let</code> are hoisted but not initialized, creating a Temporal Dead Zone (TDZ) from the start of the block until the declaration is evaluated. You cannot access a <code>let</code> variable before its declaration without causing a ReferenceError.
+      </p>
+      <p><strong>How Hoisting Works with <code>let</code>:</strong></p>
+      <p>
+        During compilation, <code>let</code> declarations are hoisted to the top of their block but remain uninitialized. Accessing them before the actual line causes a ReferenceError.
+      </p>
+      <p><strong>Why Hoisting Matters:</strong></p>
+      <ul>
+        <li>Prevents accidental usage of uninitialized variables.</li>
+        <li>Helps catch errors early by throwing ReferenceError if accessed too soon.</li>
+      </ul>
+      <p><strong>Quick Rules of Thumb:</strong></p>
+      <ul>
+        <li>Always declare <code>let</code> and <code>const</code> at the top of their block.</li>
+        <li>Avoid referencing them before declaration to prevent TDZ errors.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>Use <code>let</code> for variables that will be reassigned; ensures block scoping.</li>
+        <li>Remember TDZ only applies from the start of the block to the declaration line.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: TDZ demonstration
+// console.log("let var before declaration:", y); // Uncommenting this line throws ReferenceError: Cannot access 'y' before initialization
+let y = 60;
+console.log("let y after declaration:", y); // Output: 60
+
+// Step 2: let inside a block (block-scoped)
+function letScope() {
+  let b = 1;
+  if (true) {
+    let b = 2; // different variable, block-scoped
+    console.log("Inside if (let):", b); // Output: 2
+  }
+  console.log("Outside if (let):", b); // Output: 1
+}
+letScope();
+
+// Explanation:
+// - Accessing 'y' before its declaration throws a ReferenceError due to TDZ.
+// - 'b' inside letScope is block-scoped, so inner and outer 'b' do not collide.
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: const Declaration & Objects -->
+    <div class="example">
+      <h2>Example 3: <code>const</code> Declaration & Mutable Objects</h2>
+      <p>
+        The <code>const</code> keyword declares a block-scoped constant. Constants must be initialized when declared and cannot be reassigned. However, if a <code>const</code> holds an object or array, you can modify its contents; you just can’t reassign the variable reference itself.
+      </p>
+      <p><strong>How Hoisting Works with <code>const</code>:</strong></p>
+      <p>
+        Similar to <code>let</code>, <code>const</code> is hoisted to the top of its block but remains uninitialized until the declaration line. Attempting to access it before declaration results in a ReferenceError.
+      </p>
+      <p><strong>Why Hoisting Matters:</strong></p>
+      <ul>
+        <li>Ensures constants are not used before they are defined, preventing undefined behavior.</li>
+      </ul>
+      <p><strong>Quick Rules of Thumb:</strong></p>
+      <ul>
+        <li>Use <code>const</code> for values that should never be reassigned.</li>
+        <li>For objects and arrays, use <code>const</code> to protect the reference, but you can still mutate properties/elements.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>When in doubt, start with <code>const</code>. If you need to reassign, switch to <code>let</code>.</li>
+        <li>Beware: modifying nested objects within a <code>const</code> will not throw an error—it’s only the reference itself that’s protected.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: const hoisting demonstration
+// console.log("const z before declaration:", z); // Uncommenting throws ReferenceError: Cannot access 'z' before initialization
+const z = 100;
+console.log("Constant z:", z); // Output: 100
+
+// Step 2: const object and mutation
+const person = { name: "Alice", age: 30 };
+console.log("Initial person:", person); // Output: { name: "Alice", age: 30 }
+
+// Mutating a property is allowed
+person.age = 31;
+console.log("Modified person:", person); // Output: { name: "Alice", age: 31 }
+
+// Attempt to reassign the const reference (will throw an error if uncommented)
+// person = { name: "Bob", age: 25 }; // TypeError: Assignment to constant variable.
+
+// Explanation:
+// - 'z' is in TDZ before its declaration, so accessing it early causes a ReferenceError.
+// - The 'person' object can be mutated but cannot be reassigned.
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Dynamic Typing & typeof -->
+    <div class="example">
+      <h2>Example 4: Dynamic Typing & <code>typeof</code></h2>
+      <p>
+        JavaScript is dynamically typed: a variable can hold any type of value, and that type can change at runtime. Use <code>typeof</code> to inspect the current type of a variable.
+      </p>
+      <p><strong>How Hoisting & Compilation Relate:</strong></p>
+      <p>
+        During the compile phase, variable names (with <code>var</code>, <code>let</code>, <code>const</code>) are registered in their respective scopes. Then at runtime, the actual type of a variable is determined when an assignment occurs. Because of dynamic typing, a variable declared with <code>let</code> can hold a number, then later hold a string, etc.
+      </p>
+      <p><strong>Quick Rules of Thumb:</strong></p>
+      <ul>
+        <li>Be mindful that <code>typeof null</code> returns <code>"object"</code> (this is a long-standing quirk).</li>
+        <li>Use strict equality <code>===</code> to avoid unintended type coercion.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>When debugging, always check <code>typeof</code> to confirm a variable’s runtime type.</li>
+        <li>Avoid relying on dynamic typing for critical code paths; consider explicit type checks if needed.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Declare a dynamic variable without initializing
+let dynamicVar;
+console.log("Type before assignment:", typeof dynamicVar); // undefined
+
+// Step 2: Assign a number
+dynamicVar = 100;
+console.log("Value:", dynamicVar, "| Type:", typeof dynamicVar); // 100 | number
+
+// Step 3: Assign a string
+dynamicVar = "Hello";
+console.log("Value:", dynamicVar, "| Type:", typeof dynamicVar); // "Hello" | string
+
+// Step 4: Assign an object
+dynamicVar = { key: "value" };
+console.log("Value:", dynamicVar, "| Type:", typeof dynamicVar); // { key: "value" } | object
+
+// Step 5: Assign null (quirk: typeof returns "object")
+dynamicVar = null;
+console.log("Value:", dynamicVar, "| Type:", typeof dynamicVar); // null | object
+
+// Explanation:
+// - A variable’s type can change dynamically at runtime.
+// - typeof null is "object" due to legacy reasons.
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: Template Literals & Variables -->
+    <div class="example">
+      <h2>Example 5: Template Literals & Interpolation</h2>
+      <p>
+        Template literals use backticks (<code>`</code>) to allow embedded expressions and multiline strings. They make combining variables into strings much easier than using concatenation.
+      </p>
+      <p><strong>Quick Tips & Common Pitfalls:</strong></p>
+      <ul>
+        <li>Be careful with nested backticks or quotes; always use <code>${...}</code> for expressions.</li>
+        <li>Multiline template literals preserve whitespace and line breaks exactly as typed.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>Use template literals when building HTML strings or logging complex data to keep code readable.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Declare variables
+let firstName = "John";
+let lastName = "Doe";
+
+// Step 2: Use template literal to combine variables
+let fullName = `${firstName} ${lastName}`;
+console.log("Full Name:", fullName); // "John Doe"
+
+// Step 3: Multiline string
+let address = `
+123 Main St.
+Cityville, ST 12345
+`;
+console.log("Address:", address);
+
+// Step 4: Interpolate expression
+let a = 5, b = 10;
+console.log(`Sum of ${a} + ${b} = ${a + b}`); // "Sum of 5 + 10 = 15"
+
+// Explanation:
+// - Template literals allow direct interpolation: ${variable} or ${expression}.
+// - Multiline strings don’t require "\n" or concatenation.
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Variable Scope Comparison -->
+    <div class="example">
+      <h2>Example 6: Variable Scope Comparison</h2>
+      <p>
+        Variables declared with <code>var</code> are function-scoped, while <code>let</code> and <code>const</code> are block-scoped. Proper scoping prevents accidental overrides and unexpected behavior.
+      </p>
+      <p><strong>Quick Rules of Thumb:</strong></p>
+      <ul>
+        <li>Use <code>let</code> and <code>const</code> to avoid issues with <code>var</code> hoisting.</li>
+        <li>Declare variables in the narrowest possible scope (e.g., inside a block) to limit side effects.</li>
+      </ul>
+      <p><strong>Final Tips:</strong></p>
+      <ul>
+        <li>Always prefer <code>const</code> unless you need to reassign; then use <code>let</code>.</li>
+        <li>Reserve <code>var</code> only for legacy code or when function scope is explicitly required.</li>
+      </ul>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: var inside a function (function-scoped)
+function varScope() {
+  var a = 1;
+  if (true) {
+    var a = 2; // same variable, function-scoped
+    console.log("Inside if (var):", a); // Output: 2
+  }
+  console.log("Outside if (var):", a); // Output: 2
+}
+varScope();
+
+// Step 2: let inside a block (block-scoped)
+function letScope() {
+  let b = 1;
+  if (true) {
+    let b = 2; // different variable, block-scoped
+    console.log("Inside if (let):", b); // Output: 2
+  }
+  console.log("Outside if (let):", b); // Output: 1
+}
+letScope();
+
+// Step 3: const inside a block (block-scoped)
+function constScope() {
+  const c = 1;
+  if (true) {
+    const c = 2; // different variable, block-scoped
+    console.log("Inside if (const):", c); // Output: 2
+  }
+  console.log("Outside if (const):", c); // Output: 1
+}
+constScope();
+
+// Explanation:
+// - var variables are function-scoped, so redeclaration inside the same function overrides the original.
+// - let and const variables are block-scoped, so inner blocks can have their own distinct variable.
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: Quick Tips & Common Pitfalls -->
+    <div class="example">
+      <h2>Example 7: Quick Tips & Common Pitfalls</h2>
+      <p>
+        A summary of best practices and pitfalls when working with JavaScript variables:
+      </p>
+      <ul>
+        <li>Always declare variables at the top of their scope to avoid TDZ issues (<code>let</code>/<code>const</code>).</li>
+        <li>Initialize variables upon declaration to make hoisting behavior predictable.</li>
+        <li>Prefer <code>const</code> for values that don't change, <code>let</code> for values that do. Avoid <code>var</code> where possible.</li>
+        <li>Remember <code>typeof null</code> returns <code>"object"</code>—use strict null checks if necessary.</li>
+        <li>Be cautious when modifying objects/arrays declared with <code>const</code>—the reference is constant, but properties/elements can change.</li>
+      </ul>
+      <p><strong>Fun Fact:</strong> Arrays are specialized objects—when you assign to a high index, the <code>.length</code> property auto-updates:</p>
+      <pre style="background-color: #eee; padding: 10px; border-radius: 4px; overflow-x: auto;">
+const weird = [];
+weird[5] = "hello";
+console.log(weird);           // [ <5 empty items>, 'hello' ]
+console.log(weird.length);    // 6
+      </pre>
+      <p>
+        Although only index 5 is assigned, the array’s <code>.length</code> becomes 6.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

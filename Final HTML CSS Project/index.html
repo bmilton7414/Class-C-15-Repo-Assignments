@@ -3,26 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Grid Layout</title>
+    <title>Bradford Milton's Portfolio</title>
     <link rel="stylesheet" href="./style.css">
+   
+
 </head>
 <body>
-    <script src="CodeCampTester.js"></script>
-    <h1>CSS Grid Layout Example</h1>
-    <p>This is a simple example of a CSS Grid layout.</p>       
-    <h2> </h2>
-    <p> </p>
-    
+  <script src="CodeCampTester.js"></script>
 
-    
+<a id="top"></a>
 
+
+    <section id="home">
+    <header>
+         <!-- NAVBAR at the very top -->
+        <nav>
+            <nav id="nav-bar" class="site-header">
+            <div class="container header-top">
+                <div class="header-left">
+                    <img src="Assets/giphy.gif" alt="logo" class="logo" id="header-img" style="width: 1200px; height: 200px;" />
+                </div>
+
+                     <nav id="navbar">
+                        
+                        <a href="#welcome-section" class="nav-link">Home</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#projects" class="nav-link">Work</a>
+                        <a href="#certifications" class="nav-link">Certifications</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+                        <button id="theme-switch" aria-label="Toggle theme">🌙</button>
+                    </nav>
+                </div>
+                    
+                    
+    </header>
+    </section>
+    <main>
+    <!-- Welcome Section -->
+     <section id="welcome-section">
+
+    <h1>Bradford Milton</h1>
+    <p>Creative Website Developer</p>
+     </section>
+ <!-- MAIN CONTENT -->
+<section id="about">
+      
+    <h1><b><u> About Me </u></b></h1>
+    <p>Hello, I’m <strong>Brad</strong>. I build creative, responsive, and accessible websites with HTML, CSS, and JavaScript. There is nothing or no experience that i can't create when it comes to designing you personal website for business marketking, charity, or personal use. Explore examples of my work and review my certifications below!</p></section>
+  
+    
+<br>
+
+ 
+     <section id="projects">
+<h3>
+    
+    <b><u> Projects</u> </b>
+</h3>
+    
+<!-- grid-container -->
     <div class="grid-container">
-        <div class="grid-item">Item 1</div>
-        <div class="grid-item">Item 2</div>
-        <div class="grid-item">Item 3</div>
-        <div class="grid-item">Item 4</div>
-        <div class="grid-item">Item 5</div>
-        <div class="grid-item">Item 6</div>
+        <div class="project-tile grid-item">
+            <a href="tech_doc\techdoc.html"  id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">Tech-Doc
+      </a></div>
+      <a href="Hero/blackpanther.html" 
+            id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">SuperHero</a>
+        <a href="Gooey Effect (css)/gooeyeffect.html" 
+            id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">Gooey Effct</a>
+       <a href="product_landing_page/toothbrushes4you.html" 
+            id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">
+            Product Landing
+          </a>
+        <div class="project-tile grid-item">
+        <a href="tribute_page/tribute.html" 
+            id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">
+            Tribute Page
+          </a></div>
+          <a href="07-survey-form/index.html" 
+            id="profile-link" 
+            class="project-tile grid-item" 
+            target="_blank" 
+            rel="noopener">Survey Form</a>
+        
     </div>
+  </section>
+    <br>
+    
+<br>
+
+<br>
+
+<section id="video">
+  <h3><b><u> </u></b></h3>
+  <p></p>
+<div class="product-video">
+  <h4>How to Build an HTML Page</h4>
+  <iframe 
+    id="video" 
+    width="550" 
+    height="350" 
+    src="https://www.youtube.com/embed/pQN-pnXPaVg" 
+    title="How to Build an HTML Page" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+</section>
+
+
+ <!-- <a href="tribute_page/index.html" class="project-card project-tile"> -->
+            
+            <div class="project-info">
+
+              <section id="certifications">
+              <h3>My Certifications</h3>
+            </div>
+
+      
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-label"><span><b><u>Contact</span>  <span>Me</u></b></span></div></h5>
+      <div class="section-content">
+        <ul class="contact-list">
+          <li>Email: <a href="mailto:Bmilton7414@gmail.com">Bmilton7414@gmail.com</a></li>
+          <br>
+          <li>Phone: <a href="tel:+12818308004">281-830-8004</a></li><br>
+          <li>GitHub Page - <a href="https://github.com/Bmilton7414" target="_blank">GitHub</a></li>
+    </ul>
+</section>
+      <p>  
+        <br>
+
+        <br>
+       </p>
+   
+    
+    </main>
+    <br>
+    <footer>
+        <!-- FOOTER -->
+        <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2025 Your Name • Built with &amp; CSS Variables</p>
+    </div>
+     <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to Top">↑</button>
+
+  <section id="signup">
+  <h4><b><u>Sign Up for Updates</u></b></h4>
+  <form id="form" action="https://www.freecodecamp.com/email-submit" method="post">
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
+    <input type="submit" id="submit" value="Subscribe">
+  </form>
+</section>
+
+    </footer> 
+   <!-- mode switch button -->
+  <script>
+  const switchBtn = document.getElementById('theme-switch');
+  let night = true;
+
+  switchBtn.addEventListener('click', () => {
+    document.body.classList.toggle('night-mode');
+    night = !night;
+    switchBtn.innerHTML = night ? '🌙 Switch' : '☀️ Switch';
+  });
+</script>
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  // Scroll to top when clicked
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Optional: Show/hide the button when scrolling
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>

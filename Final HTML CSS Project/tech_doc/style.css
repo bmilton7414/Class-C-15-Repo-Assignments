@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+/* Base layout for regular-sized screens (desktops/laptops) */
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 300px;         /* Half of viewport width */
+  height: 100%;       /* Full screen height */
+  overflow-y: auto;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ccc;
+  /* padding: 1rem; */
+  min-width: 290px;
+}
+
+#main-doc {
+  margin-left: 50vw;   /* Push main content right of navbar */
+  padding: 2rem;
+  
+}
+
+/* headings are centered */
+h1, h2 {
+  text-align: center;
+}
+
+/* Media query for smaller devices (e.g. phones) */
+@media (max-width: 850px) {
+  #navbar {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    max-height: 400px;;
+  }
+
+  #main-doc {
+    margin-left: 0;
+    margin-top: 200px;
+   margin-left: 0px;
+   padding: 2rem 1rem;
+  }
+}
+
+/* Base (Light Mode) Theme */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button style */
+#theme-switch {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Night Mode Theme */
+body.night-mode {
+  background-color: #504e53; /* Soft dark purple */
+  color: #f0e6ff;
+}
+
+/* Adjust navbar background in night mode */
+body.night-mode #navbar {
+  background-color: #555456;
+  border-right: 1px solid #6648a0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+

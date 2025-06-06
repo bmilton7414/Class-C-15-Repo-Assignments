@@ -8,7 +8,7 @@ let y = 10;
 let z = 4;
 
 let greeting = 'hello';
-let firstName = 'Cody'; // Replace 'Cody' with your actual name if needed
+let firstName = 'Cody'; 
 let callStatus = 'ringing';
 
 // ===== Functions =====

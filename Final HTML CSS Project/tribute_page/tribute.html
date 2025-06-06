@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribute Page</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <script src="CodeCampTester.js"></script>
+
+  <main id="main">
+    <button id="theme-switch">🌙 Switch</button>
+
+    <h1 id="title">The Tribal Chief</h1>
+
+    <figure id="img-div">
+      <img id="image" src="img/cheif.webp" alt="Image of a Chief" />
+      <figcaption id="img-caption">"Chief"</figcaption>
+    </figure>
+
+    <div id="tribute-info">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit optio perferendis laborum? Placeat consequuntur illum sint nesciunt error quisquam distinctio modi amet illo! Ullam quaerat expedita aut? Sed, totam voluptate.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus eveniet exercitationem explicabo, mollitia delectus quam facere odio, optio impedit nisi rem, natus nihil. Dicta neque aliquam maxime nobis error voluptas!</p>
+    </div>
+
+    <a id="tribute-link" href="https://welcomenativespirit.com/blogs/news/indian-chief-history#:~:text=Among%20the%20North%20American%20Indians,and%20obligations%2C%20and%20to%20conserve" target="_blank">Learn more about Chief</a>
+  </main>
+  <script>
+  const switchBtn = document.getElementById('theme-switch');
+  let night = true;
+
+  switchBtn.addEventListener('click', () => {
+    document.body.classList.toggle('night-mode');
+    night = !night;
+    switchBtn.innerHTML = night ? '🌙 Switch' : '☀️ Switch';
+  });
+</script>
+
+</body>
+<footer>
+</footer>
+</html>

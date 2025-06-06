@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECH DOC</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <script src="CodeCampTester.js"></script>
+
+  <nav id="navbar">
+    <header>
+      <h1>Web Accessibility Technical Documentation</h1>
+    </header>
+    <ul>
+      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li><a class="nav-link" href="#Why_Accessibility_Matters">Why Accessibility Matters</a></li>
+      <li><a class="nav-link" href="#Semantic_HTML">Semantic HTML</a></li>
+      <li><a class="nav-link" href="#ARIA_Roles">ARIA Roles</a></li>
+      <li><a class="nav-link" href="#Keyboard_Navigation">Keyboard Navigation</a></li>
+    </ul>
+    <button id="theme-switch" aria-label="Switch Theme">🌙 Switch</button>
+  </nav>
+
+  <main id="main-doc">
+    <section class="main-section" id="Introduction">
+      <header><h2>Introduction</h2></header>
+      <p>Welcome to my Tech Doc.</p>
+      <p>This section introduces the importance of web accessibility in modern web development.</p>
+      <p>HTML elements like <code>&lt;main&gt;</code> and <code>&lt;header&gt;</code> help define page structure.</p>
+    </section>
+
+    <section class="main-section" id="Why_Accessibility_Matters">
+      <header><h2>Why Accessibility Matters</h2></header>
+      <p>Accessibility ensures that everyone, including individuals with disabilities, can interact with web content.</p>
+      <p>It is not just a legal requirement but also a moral obligation to make the web inclusive.</p>
+      <p>Accessible design benefits users with visual, auditory, motor, and cognitive impairments.</p>
+      <p>By following accessibility best practices, we create a better experience for all users.</p>
+      <p>Accessibility also enhances SEO and improves overall site performance.</p>
+      <p>It also improves usability for all users, including those on mobile devices or with slow connections.</p>
+      <ul>
+        <li>Supports screen readers</li>
+        <li>Enables keyboard navigation</li>
+      </ul>
+    </section>
+
+    <section class="main-section" id="Semantic_HTML">
+      <header><h2>Semantic HTML</h2></header>
+      <p>Semantic HTML elements convey meaning beyond presentation, such as:</p>
+      <ul>
+        <li><code>&lt;article&gt;</code></li>
+        <li><code>&lt;section&gt;</code></li>
+      </ul>
+      <p>These help screen readers and browsers understand content better.</p>
+      <p>Using semantic elements improves accessibility by providing context to assistive technologies.</p>
+      <p>For example, using <code>&lt;nav&gt;</code> for navigation links helps users understand the page structure.</p>
+      <p>Semantic HTML also enhances SEO by providing clear content hierarchy.</p>
+      <p>Always use the most appropriate HTML element for your content.</p>
+    </section>
+
+    <section class="main-section" id="ARIA_Roles">
+      <header><h2>ARIA Roles</h2></header>
+      <p>ARIA roles add metadata to elements to assist screen readers.</p>
+      <p>They help define the purpose of an element when semantic HTML is not enough.</p>
+      <p>Use ARIA roles to enhance accessibility, especially for dynamic content or custom widgets.</p>
+      <p>Common ARIA roles include:</p>
+      <p>Example: <code>role="navigation"</code> tells assistive tech that the element is a navigation region.</p>
+      <p>Other common roles include <code>role="button"</code> and <code>role="alert"</code>.</p>
+    </section>
+
+    <section class="main-section" id="Keyboard_Navigation">
+      <header><h2>Keyboard Navigation</h2></header>
+      <p>Accessible websites must support navigation using only the keyboard, such as with Tab and Enter keys.</p>
+      <p>Always ensure your site has a <code>:focus</code> style so users can track where they are on the page.</p>
+      <p>Use <code>tabindex</code> to manage focus order for interactive elements.</p>
+      <p>Test your site with keyboard-only navigation to ensure all interactive elements are accessible.</p>
+      <ol>
+        <li>Use <code>tabindex</code> to manage focus</li>
+        <li>Test with keyboard only</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    </footer>
+
+  <script>
+    const switchButton = document.getElementById("theme-switch");
+
+    switchButton.addEventListener("click", () => {
+      document.body.classList.toggle("night-mode");
+
+      // Toggle icon/text
+      if (document.body.classList.contains("night-mode")) {
+        switchButton.textContent = "☀️ Switch";
+      } else {
+        switchButton.textContent = "🌙 Switch";
+      }
+    });
+  </script>
+</body>
+</html>
+

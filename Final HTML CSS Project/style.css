@@ -1,27 +1,141 @@
+/* Apply padding so content isn’t hidden behind the fixed navbar */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+  padding-top: 60px; /* Adjust if navbar height changes */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #D2B48C; /* classic tan hex */
+
+}
+#navbar a {
+  color: rgb(255, 255, 255); /* Change this to any color you want */
+  font-weight: bold; /* Optional: makes it bolder */
 }
 
+body {
+  background-image: url("background/j4o.gif"); /* Path to your image */
+  background-size: cover;        /* Cover the whole screen */
+  background-repeat: no-repeat;  /* No tiling */
+  background-position: center;   /* Center the image */
+  background-attachment: fixed;  /* Optional: makes it stay when scrolling */
+  color: white;                  /* Optional: text contrast adjustment */
+    text-align: center;
+    font-family: josefin sans-serif;
+}
+
+/* Fix navbar to top of viewport */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4CAF50;
+  z-index: 1000;
+  padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  
+}
+
+/* Grid layout for projects */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 80%;
-    max-width: 1200px;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 80%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .grid-item {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.2em;
-    border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+.grid-item:hover {
+  background-color: #45a049;
+}
+
+.grid-item:active {
+  background-color: #3e8e41;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  #video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+#welcome-section {
+  height: 100vh;               /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Vertically center content */
+  align-items: center;         /* Horizontally center content */
+  text-align: center;
+    /* Optional: light background */
+  color: #ffffff;
+  padding: 0 20px;
+  font-size: 2.2em;
+}
+#about {
+color: rgb(255, 255, 255);
+font-style: italic;
+font-size: 2.0em;
+}
+
+/* toggle button */
+
+.night-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+#theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#theme-switch:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  t 
 }

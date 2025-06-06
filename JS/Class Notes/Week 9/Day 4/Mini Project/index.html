@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Numbers</title>
+  <link src="./style.css">
+</head>
+
+<body>
+  <h1>This is the number generator Challenge</h1>
+  <h2>Mini Project on Event Listner</h2>
+  <!-- Create a div container on HTML document -->
+
+  <script src="./DOM.js"></script>
+
+</body>
+
+</html>
+function calculateWeight() {
+    const weight = document.getElementById('weight').value;
+    const planet = document.getElementById('planet').value;
+
+    let gravity;
+    switch(planet) {
+        case 'mercury':
+            gravity = 3.7;
+            break;
+        case 'venus':
+            gravity = 8.87;
+            break;
+        case 'earth':
+            gravity = 9.81;
+            break;
+        case 'mars':
+            gravity = 3.711;
+            break;
+        case 'jupiter':
+            gravity = 24.79;
+            break;
+        case 'saturn':
+            gravity = 10.44;
+            break;
+        case 'uranus':
+            gravity = 8.69;
+            break;
+        case 'neptune':
+            gravity = 11.15;
+            break;
+        default:
+            gravity = 0; // Invalid planet
+    }
+
+    const calculatedWeight = (weight * gravity).toFixed(2);
+    document.getElementById('result').innerHTML = `Weight on ${planet.charAt(0).toUpperCase() + planet.slice(1)}: ${calculatedWeight} N`;
+}

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Objects Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Objects Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: JavaScript Objects</h2>
+      <p>
+        In JavaScript, objects are collections of key:value pairs that can hold
+        primitives, other objects, arrays, functions, and more. Objects are
+        fundamental for representing real-world entities, configurations, and
+        data structures.
+      </p>
+      <p><strong>Why Objects Matter:</strong></p>
+      <ul>
+        <li>Group related data under one coherent structure</li>
+        <li>Attach methods (functions) to data for behavior</li>
+        <li>Enable JSON-based data interchange (APIs, storage)</li>
+      </ul>
+      <p><strong>Creating & Adding Properties:</strong></p>
+      <ul>
+        <li>Literal Syntax: <code>const obj = { key: value };</code></li>
+        <li>Dot Notation: <code>obj.newKey = newValue;</code></li>
+        <li>Bracket Notation: <code>obj["dynamicKey"] = value;</code></li>
+        <li><code>Object.defineProperty(obj, "prop", { value: v, writable: true })</code></li>
+      </ul>
+      <p><strong>Deleting & Checking Properties:</strong></p>
+      <ul>
+        <li>Delete: <code>delete obj.key;</code></li>
+        <li>Check: <code>"key" in obj</code> returns <code>true</code> or <code>false</code></li>
+      </ul>
+      <p><strong>Property Descriptors:</strong></p>
+      <ul>
+        <li>Use <code>Object.getOwnPropertyDescriptor(obj, "key")</code></li>
+        <li>Configure <code>enumerable</code>, <code>configurable</code>, <code>writable</code></li>
+      </ul>
+      <p>
+        Understanding prototypes and inheritance is also key: every object has
+        a prototype, accessible via <code>Object.getPrototypeOf(obj)</code>,
+        and can inherit properties/methods from that prototype chain.
+      </p>
+    </div>
+
+    <!-- Example 1: Object Literal & Property Access -->
+    <div class="example">
+      <h2>Example 1: Object Literal & Property Access</h2>
+      <p>
+        Create an object using literal syntax and access or modify its
+        properties.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Create an object literal with properties
+const person = {
+  firstName: "Alice",
+  lastName: "Johnson",
+  age: 30
+};
+
+// Step 2: Access properties via dot notation
+console.log("First Name:", person.firstName); // Output: Alice
+console.log("Age:", person.age);             // Output: 30
+
+// Step 3: Access properties via bracket notation
+console.log("Last Name:", person["lastName"]); // Output: Johnson
+
+// Step 4: Modify a property
+person.age = 31;
+console.log("Modified Age:", person.age);      // Output: 31
+
+// Step 5: Delete a property
+delete person.lastName;
+console.log("After delete lastName:", person); 
+// Output: { firstName: "Alice", age: 31 }
+
+// Step 6: Check existence
+console.log("Has lastName?", "lastName" in person); // Output: false
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: Adding Properties & Methods Dynamically -->
+    <div class="example">
+      <h2>Example 2: Adding Properties & Methods Dynamically</h2>
+      <p>
+        Dynamically add new properties and methods to an existing object at
+        runtime.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Start with an existing object
+const car = {
+  make: "Toyota",
+  model: "Camry"
+};
+
+// Step 2: Add a new property dynamically via dot notation
+car.year = 2021;
+
+// Step 3: Add a new property via bracket notation
+const dynamicKey = "color";
+car[dynamicKey] = "blue";
+
+// Step 4: Add a method to the object
+car.getInfo = function() {
+  console.log(`${this.make} ${this.model} (${this.year}) - Color: ${this.color}`);
+};
+
+// Step 5: Invoke the newly added method
+car.getInfo(); 
+// Output: Toyota Camry (2021) - Color: blue
+
+// Step 6: Add a nested object
+car.owner = { name: "Bob", license: "XYZ123" };
+console.log("Owner Name:", car.owner.name); // Output: Bob
+
+// Explanation:
+// - Dot notation: obj.key = value
+// - Bracket notation: obj["key"] = value
+// - Methods are functions assigned to properties
+// - Nested objects allow hierarchical data structures
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: Computed Property Names & Deleting Properties -->
+    <div class="example">
+      <h2>Example 3: Computed Property Names & Deleting Properties</h2>
+      <p>
+        Use bracket notation within object literal to compute property names,
+        and then delete properties dynamically.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Define dynamic keys
+const key1 = "name";
+const key2 = "score";
+
+// Step 2: Create object using computed property names
+const player = {
+  [key1]: "Bob",
+  [key2]: 100
+};
+
+// Step 3: Access computed properties
+console.log("Player Name:", player.name);   // Output: Bob
+console.log("Player Score:", player.score); // Output: 100
+
+// Step 4: Add another computed property after creation
+const key3 = "level";
+player[key3] = 5;
+console.log("Player Level:", player.level); // Output: 5
+
+// Step 5: Delete a property dynamically
+delete player.score;
+console.log("After deleting score:", player); 
+// Output: { name: "Bob", level: 5 }
+
+// Step 6: Check existence using in operator
+console.log("Has score?", "score" in player); // Output: false
+
+// Explanation:
+// - Computed properties: [expression] within literal
+// - delete operator removes a property
+// - "key" in obj checks existence (true/false)
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Object.assign, Spread Syntax & Deep Cloning -->
+    <div class="example">
+      <h2>Example 4: Object.assign, Spread Syntax & Deep Cloning</h2>
+      <p>
+        Merge or clone objects using <code>Object.assign</code>, spread syntax,
+        and demonstrate shallow vs. deep cloning.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Original objects
+const obj1 = { a: 1, b: 2 };
+const obj2 = { b: 3, c: 4 };
+
+// Step 2: Merge using Object.assign (shallow)
+const merged1 = Object.assign({}, obj1, obj2);
+console.log("Merged with Object.assign:", merged1);
+// Output: { a: 1, b: 3, c: 4 }
+
+// Step 3: Merge using spread syntax (shallow)
+const merged2 = { ...obj1, ...obj2 };
+console.log("Merged with spread:", merged2);
+// Output: { a: 1, b: 3, c: 4 }
+
+// Step 4: Shallow clone using spread
+const cloneShallow = { ...obj1 };
+console.log("Shallow clone:", cloneShallow); // Output: { a: 1, b: 2 }
+
+// Step 5: Nested object to demonstrate deep vs. shallow
+const nested = { x: { y: 10 } };
+const shallowCopy = { ...nested };
+shallowCopy.x.y = 20;
+console.log("Nested original after shallow copy mutation:", nested.x.y);
+// Output: 20 (shallow copy shares reference)
+
+// Step 6: Deep clone using JSON methods
+const deepClone = JSON.parse(JSON.stringify(nested));
+deepClone.x.y = 30;
+console.log("Nested original after deep clone mutation:", nested.x.y);
+// Output: 20 (deep clone separated reference)
+
+// Explanation:
+// - Object.assign() and {...} create shallow copies
+// - Nested object references remain shared in shallow copy
+// - JSON.parse(JSON.stringify(obj)) performs deep clone for JSON-safe objects
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: Prototypes & Inheritance -->
+    <div class="example">
+      <h2>Example 5: Prototypes & Inheritance</h2>
+      <p>
+        Create objects that inherit properties and methods via the prototype
+        chain, and examine property lookup.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Create a prototype object with shared properties/methods
+const animalProto = {
+  type: "Unknown",
+  speak: function() {
+    console.log(`This is a ${this.type}`);
+  }
+};
+
+// Step 2: Create a new object that inherits from animalProto
+const dog = Object.create(animalProto);
+dog.type = "Dog";
+dog.speak(); // Output: This is a Dog
+
+// Step 3: Create another object inheriting from animalProto
+const cat = Object.create(animalProto);
+cat.type = "Cat";
+cat.speak(); // Output: This is a Cat
+
+// Step 4: Verify prototype linkage
+console.log(Object.getPrototypeOf(dog) === animalProto); // Output: true
+
+// Step 5: Add new method to prototype after creation
+animalProto.walk = function() {
+  console.log(`${this.type} is walking`);
+};
+dog.walk(); // Output: Dog is walking
+cat.walk(); // Output: Cat is walking
+
+// Explanation:
+// - Object.create(proto) sets proto as the new object’s prototype
+// - Methods added to the prototype after creation are available to all inheriting objects
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Object.keys, Object.values, Object.entries -->
+    <div class="example">
+      <h2>Example 6: Object.keys, Object.values, Object.entries</h2>
+      <p>
+        Extract keys, values, or [key, value] pairs from an object.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Create an object
+const user = {
+  name: "Carol",
+  age: 28,
+  city: "Seattle"
+};
+
+// Step 2: Get keys
+const keys = Object.keys(user);
+console.log("Keys:", keys); // Output: ["name", "age", "city"]
+
+// Step 3: Get values
+const values = Object.values(user);
+console.log("Values:", values); // Output: ["Carol", 28, "Seattle"]
+
+// Step 4: Get entries
+const entries = Object.entries(user);
+console.log("Entries:", entries);
+// Output: [["name","Carol"], ["age",28], ["city","Seattle"]]
+
+// Explanation:
+// - Object.keys(obj) returns an array of property names
+// - Object.values(obj) returns an array of property values
+// - Object.entries(obj) returns an array of [key, value] pairs
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: Object Destructuring & Nested Destructuring -->
+    <div class="example">
+      <h2>Example 7: Object Destructuring & Nested Destructuring</h2>
+      <p>
+        Extract properties into variables using destructuring syntax, including
+        nested objects.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Create an object with nested structure
+const config = {
+  server: {
+    host: "localhost",
+    port: 8080
+  },
+  database: {
+    user: "admin",
+    pass: "secret"
+  }
+};
+
+// Step 2: Destructure top-level properties
+const { server, database } = config;
+console.log("Server Config:", server);     // Output: { host: "localhost", port: 8080 }
+console.log("Database Config:", database); // Output: { user: "admin", pass: "secret" }
+
+// Step 3: Nested destructuring with renaming
+const { server: { host: serverHost, port: serverPort } } = config;
+console.log("Host:", serverHost); // Output: localhost
+console.log("Port:", serverPort); // Output: 8080
+
+// Step 4: Destructure missing property with default value
+const { api = "v1" } = config;
+console.log("API Version:", api); // Output: v1
+
+// Explanation:
+// - Nested destructuring allows pulling nested properties directly
+// - Default values prevent undefined if property is missing
+      </textarea>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: Property Descriptors & Object.defineProperty -->
+    <div class="example">
+      <h2>Example 8: Property Descriptors & <code>Object.defineProperty</code></h2>
+      <p>
+        Define or modify property attributes (enumerable, configurable,
+        writable) using <code>Object.defineProperty</code>.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Create an empty object
+const user = {};
+
+// Step 2: Define a non-enumerable property
+Object.defineProperty(user, "id", {
+  value: 123,
+  writable: false,      // cannot be changed
+  enumerable: false,    // won't show up in for...in or Object.keys
+  configurable: false   // cannot delete or reconfigure
+});
+console.log("User ID:", user.id); // Output: 123
+
+// Step 3: Try to modify the property (fails silently in non-strict mode)
+user.id = 999;
+console.log("After attempted modification:", user.id); // Still 123
+
+// Step 4: Enumerate properties
+for (let key in user) {
+  console.log("Key in user:", key); // No output, id is non-enumerable
+}
+console.log("Object.keys(user):", Object.keys(user)); // Output: []
+
+// Step 5: Define a normal property for comparison
+Object.defineProperty(user, "name", {
+  value: "Eve",
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
+console.log("User Name:", user.name); // Output: Eve
+
+// Explanation:
+// - Object.defineProperty(obj, prop, descriptor) sets control over property behavior
+// - Non-enumerable: doesn't appear in loops or Object.keys
+// - Writable: controls if value can be changed
+// - Configurable: controls if property can be deleted or redefined
+      </textarea>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: for...in Loop Over Object Properties -->
+    <div class="example">
+      <h2>Example 9: <code>for...in</code> Loop Over Object Properties</h2>
+      <p>
+        Use <code>for...in</code> to iterate over an object’s enumerable
+        properties, including inherited ones (unless filtered).
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Create a base object and a derived object
+const base = { baseProp: "base" };
+const derived = Object.create(base);
+derived.name = "Charlie";
+derived.age = 40;
+
+// Step 2: for...in to iterate keys, including inherited
+for (let key in derived) {
+  console.log(key, ":", derived[key]);
+}
+// Output (order may vary):
+// name : Charlie
+// age : 40
+// baseProp : base
+
+// Step 3: Filter out inherited properties using hasOwnProperty
+for (let key in derived) {
+  if (derived.hasOwnProperty(key)) {
+    console.log("Own key:", key, "Value:", derived[key]);
+  }
+}
+// Output:
+// Own key: name Value: Charlie
+// Own key: age Value: 40
+
+// Explanation:
+// - for...in loops over all enumerable properties in prototype chain
+// - Use hasOwnProperty to filter only own properties
+      </textarea>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: Object.freeze & Object.seal -->
+    <div class="example">
+      <h2>Example 10: <code>Object.freeze</code> & <code>Object.seal</code></h2>
+      <p>
+        Prevent modifications to objects using <code>Object.freeze</code> (completely
+        immutable) or <code>Object.seal</code> (properties fixed, but values can
+        be updated).
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: Create an object
+const config = { debug: true, version: 1.0 };
+
+// Step 2: Seal the object (prevents adding/removing properties, allows modifications)
+Object.seal(config);
+config.debug = false;       // allowed
+delete config.version;      // not allowed (fails silently in non-strict mode)
+config.newProp = "test";    // not allowed
+console.log("After seal:", config); 
+// Output: { debug: false, version: 1 }
+
+// Step 3: Freeze the object (prevents any changes)
+const settings = { mode: "production", maxUsers: 100 };
+Object.freeze(settings);
+settings.mode = "development"; // not allowed
+settings.maxUsers = 200;       // not allowed
+console.log("After freeze:", settings); 
+// Output: { mode: "production", maxUsers: 100 }
+
+// Explanation:
+// - Object.seal(obj): prevents adding/removing keys, but existing values can be updated
+// - Object.freeze(obj): prevents any changes—no adding, removing, or updating properties
+      </textarea>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+    <!-- Example 11: Fun Fact – Arrays as Specialized Objects -->
+    <div class="example">
+      <h2>Example 11: Fun Fact – Arrays as Specialized Objects</h2>
+      <p>
+        In JavaScript, arrays are actually a specialized kind of object. An
+        array’s indices are just object keys that happen to be non-negative
+        integers, and the <code>.length</code> property automatically updates
+        based on the highest numeric index.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example11-code">
+// Step 1: Create an empty array (which is an object)
+const weird = [];
+
+// Step 2: Assign a value at index 5
+weird[5] = "hello";
+
+// Step 3: Log the entire array object
+console.log("Array object:", weird);
+// Expected Output: [ <5 empty items>, 'hello' ]
+
+// Step 4: Log the length property
+console.log("Array length:", weird.length);
+// Expected Output: 6
+
+// Step 5: Show that indices are keys on the object
+console.log("Property names (keys):", Object.keys(weird));
+// Expected Output: ["5"]
+
+// Step 6: Add a non-integer property
+weird.custom = "world";
+console.log("After adding custom property:", weird);
+// Output: [ <5 empty items>, 'hello', custom: 'world' ]
+
+// Step 7: Log keys again
+console.log("Property names now:", Object.keys(weird));
+// Expected Output: ["5", "custom"]
+
+// Explanation:
+// - Arrays are objects where numeric indices become keys
+// - The length property updates to highest index + 1
+// - Non-integer properties are just regular object keys
+      </textarea>
+      <div class="console-output" id="example11-console"></div>
+      <button class="run-button" data-example-id="example11">
+        Run Example 11
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

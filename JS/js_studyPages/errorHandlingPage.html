@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Error Handling & Console Logging Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 200px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Error Handling & Console Logging Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: Error Handling & Console Logging</h2>
+      <p>
+        JavaScript provides robust constructs to handle runtime errors and to log information for debugging. Key topics include:
+      </p>
+      <ul>
+        <li><strong>try...catch...finally:</strong> Wrap code that may throw exceptions, handle them, and perform cleanup.</li>
+        <li><strong>throw:</strong> Manually raise exceptions using <code>Error</code> objects or custom error types.</li>
+        <li><strong>Custom Error Types:</strong> Extend <code>Error</code> to create domain-specific exceptions.</li>
+        <li><strong>Promise Error Handling:</strong> Use <code>.catch()</code> or <code>async/await</code> with <code>try...catch</code> for asynchronous code.</li>
+        <li><strong>Global Handlers:</strong> <code>window.onerror</code> and <code>window.onunhandledrejection</code> to catch uncaught errors and promise rejections.</li>
+        <li><strong>Console API:</strong> Various methods to log data and control output:
+          <ul>
+            <li><code>console.log()</code>: Standard informational logging.</li>
+            <li><code>console.error()</code>: Logs error messages.</li>
+            <li><code>console.warn()</code>: Logs warning messages.</li>
+            <li><code>console.info()</code>: Logs informational messages distinct from <code>log</code>.</li>
+            <li><code>console.debug()</code>: Logs debug-level messages.</li>
+            <li><code>console.trace()</code>: Prints stack trace to current point.</li>
+            <li><code>console.group()</code>, <code>console.groupCollapsed()</code>, <code>console.groupEnd()</code>: Group related log messages.</li>
+            <li><code>console.time()</code>, <code>console.timeEnd()</code>: Measure time between calls.</li>
+            <li><code>console.table()</code>: Display arrays or objects as formatted tables.</li>
+          </ul>
+        </li>
+      </ul>
+      <p><strong>Key Details & Pitfalls:</strong></p>
+      <ul>
+        <li>Always catch exceptions you can handle; rethrow or log unexpected ones.</li>
+        <li>Use <code>finally</code> for cleanup (e.g., closing resources) regardless of errors.</li>
+        <li>Prefer throwing <code>Error</code> objects instead of raw strings for stack traces.</li>
+        <li>Promise rejections must be handled with <code>.catch()</code> or <code>async/await</code> <code>try...catch</code> to avoid unhandled rejections.</li>
+        <li>Global handlers should log and possibly alert users, but avoid suppressing critical errors silently.</li>
+        <li>Console methods vary by browser; using <code>console.error</code> and <code>console.warn</code> helps highlight issues in dev tools.</li>
+      </ul>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Create a centralized logger function wrapping console methods for consistent formatting or remote logging.</li>
+        <li>Use <code>instanceof</code> in <code>catch</code> to handle specific error types (e.g., <code>TypeError</code> vs <code>ValidationError</code>).</li>
+        <li>Use <code>console.groupCollapsed()</code> for nested logging to keep console tidy.</li>
+        <li>Always include a <code>default</code> in <code>switch</code>-based error routing or fallback logic.</li>
+        <li>Document error classes and codes for maintainability.</li>
+      </ul>
+    </div>
+
+    <!-- Example 1: Basic try...catch with Console Methods -->
+    <div class="example">
+      <h2>Example 1: Basic <code>try...catch</code> with Console Methods</h2>
+      <p>
+        Wrap potentially throwing code in <code>try</code>, handle in <code>catch</code>, and use different <code>console</code> methods for logging.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Wrap code in try block
+try {
+  // Parsing invalid JSON will throw a SyntaxError
+  JSON.parse("invalid JSON");
+  console.info("Parsed successfully"); 
+} catch (error) {
+  // Step 2: catch receives the Error object
+  console.error("Error caught:", error.name);       // SyntaxError
+  console.warn("Detailed message:", error.message);  // Unexpected token i in JSON at position 0
+  console.trace("Stack trace"); // Prints the stack trace of the error
+} finally {
+  // Step 3: finally always runs
+  console.log("Execution continues after try/catch/finally"); // Expected Output
+}
+
+// Explanation:
+// - JSON.parse throws a SyntaxError on invalid JSON.
+// - console.error logs error severity; console.warn highlights warnings.
+// - console.trace prints a stack trace at this point to help debugging.
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: try...catch...finally Resource Cleanup & console.table -->
+    <div class="example">
+      <h2>Example 2: <code>try...catch...finally</code> Resource Cleanup & <code>console.table</code></h2>
+      <p>
+        Use <code>finally</code> for cleanup actions, and <code>console.table</code> to display structured data.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Simulate opening a resource (e.g., database connection)
+let resourceOpen = false;
+function openResource() {
+  resourceOpen = true;
+  console.log("Resource opened");
+}
+function closeResource() {
+  resourceOpen = false;
+  console.log("Resource closed");
+}
+
+// Step 2: Use try...catch...finally to handle errors and cleanup
+try {
+  openResource();
+  // Simulate an operation error
+  throw new Error("Operation failed");
+  console.log("Operation succeeded");
+} catch (err) {
+  console.error("Operation error:", err.message); // Operation failed
+  // Use console.group to group logs
+  console.group("Error Details");
+  console.log("Name:", err.name);
+  console.log("Message:", err.message);
+  console.trace();
+  console.groupEnd();
+} finally {
+  // Always cleanup resource
+  if (resourceOpen) {
+    closeResource(); // Expected Output
+  }
+  // Use console.table to show summary
+  const summary = [
+    { step: "Open resource", status: resourceOpen ? "Still open" : "Closed" },
+    { step: "Operation", status: "Failed" }
+  ];
+  console.table(summary);
+}
+console.log("After try/catch/finally");
+
+// Explanation:
+// - console.group and console.groupEnd organize related logs under a collapsible group.
+// - console.table displays the summary array as a tabular view.
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: throw & Custom Error Logging -->
+    <div class="example">
+      <h2>Example 3: <code>throw</code> & Custom Error Logging</h2>
+      <p>
+        Manually throw errors and use a centralized logger to format console output.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Centralized error logger
+function logError(err) {
+  const timestamp = new Date().toISOString();
+  // Use console.error for high-severity
+  console.error(`[${timestamp}] ${err.name}: ${err.message}`);
+  // Use console.debug to show stack for debugging
+  console.debug(err.stack);
+}
+
+// Step 2: Validation function that throws
+function validateAge(age) {
+  if (typeof age !== "number") {
+    throw new TypeError("Age must be a number");
+  }
+  if (age < 0 || age > 120) {
+    throw new RangeError("Age must be between 0 and 120");
+  }
+  return true;
+}
+
+// Step 3: Invoke and catch errors
+try {
+  validateAge("twenty");
+} catch (err) {
+  if (err instanceof TypeError) {
+    logError(err); // Logs with timestamp, name, message, and stack
+    // Rethrow or handle specifically
+  } else {
+    logError(err);
+  }
+}
+
+// Step 4: Another example
+try {
+  validateAge(200);
+} catch (err) {
+  logError(err); // RangeError case
+}
+
+// Explanation:
+// - logError formats errors consistently, including timestamp and stack trace.
+// - Throwing specific Error subclasses aids in distinguishing errors via instanceof.
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Custom Error Subclass & console.warn -->
+    <div class="example">
+      <h2>Example 4: Custom <code>Error</code> Subclass & <code>console.warn</code></h2>
+      <p>
+        Create custom errors to represent domain-specific issues and log warnings.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Define custom error
+class ValidationError extends Error {
+  constructor(message, errorCode) {
+    super(message);
+    this.name = "ValidationError";
+    this.errorCode = errorCode;
+  }
+}
+
+// Step 2: Function that throws custom error
+function validateUsername(username) {
+  if (typeof username !== "string") {
+    throw new ValidationError("Username must be a string", 1002);
+  }
+  if (username.length < 3) {
+    throw new ValidationError("Username too short", 1001);
+  }
+  return true;
+}
+
+// Step 3: Use try...catch and warn
+try {
+  validateUsername(123);
+} catch (err) {
+  if (err instanceof ValidationError) {
+    console.warn(`Validation warning [${err.errorCode}]: ${err.message}`);
+  } else {
+    console.error("Unexpected error:", err);
+  }
+}
+
+// Step 4: Another validation
+try {
+  validateUsername("ab");
+} catch (err) {
+  console.warn(`Validation warning [${err.errorCode}]: ${err.message}`);
+}
+
+// Explanation:
+// - console.warn highlights less severe issues in console.
+// - Custom ValidationError includes an errorCode for programmatic handling.
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: Nested try...catch & Rethrowing with console.group -->
+    <div class="example">
+      <h2>Example 5: Nested <code>try...catch</code> & Rethrowing with <code>console.group</code></h2>
+      <p>
+        Catch errors at one level, group logs, then rethrow for outer handling.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Nested try...catch
+function parseJSONSafe(str) {
+  try {
+    return JSON.parse(str);
+  } catch (err) {
+    console.group("Inner catch");
+    console.error("JSON parse error:", err.message);
+    console.trace();
+    console.groupEnd();
+    // Rethrow to outer handler
+    throw err;
+  }
+}
+
+try {
+  const data = parseJSONSafe("not valid");
+  console.log("Parsed data:", data);
+} catch (outerErr) {
+  console.group("Outer catch");
+  console.error("Outer handler caught error:", outerErr.name);
+  console.debug(outerErr.stack);
+  console.groupEnd();
+}
+
+// Explanation:
+// - Use console.group to visually group related logs for clarity.
+// - Inner catch handles parsing-specific logs, outer catch handles higher-level logs.
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Promise Error Handling & console.info -->
+    <div class="example">
+      <h2>Example 6: Promise Error Handling & <code>console.info</code></h2>
+      <p>
+        Handle asynchronous errors in promise chains and log informational messages.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Create a promise that rejects
+const promiseExample = new Promise((resolve, reject) => {
+  console.info("Promise execution started");
+  setTimeout(() => {
+    reject(new Error("Promise failed"));
+  }, 300);
+});
+
+// Step 2: Attach .then, .catch, and .finally
+promiseExample
+  .then(data => {
+    console.log("Promise resolved:", data);
+  })
+  .catch(err => {
+    console.error("Caught promise error:", err.message); // Promise failed
+  })
+  .finally(() => {
+    console.info("Promise chain complete"); // Always runs
+  });
+
+// Step 3: Example without catch (unhandled rejection)
+// new Promise((_, reject) => reject("No catch"))
+//   .then(() => console.log("Will not run"));
+
+// Explanation:
+// - console.info distinguishes informational messages from regular logs.
+// - Always include .catch() or use async/await with try...catch to avoid unhandled rejections.
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: async/await Error Handling & console.debug -->
+    <div class="example">
+      <h2>Example 7: <code>async/await</code> Error Handling & <code>console.debug</code></h2>
+      <p>
+        Use <code>try...catch</code> inside <code>async</code> functions to handle promise rejections and debug with <code>console.debug</code>.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Async function that may reject
+function fetchData(shouldFail) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldFail) {
+        reject(new Error("Fetch failed"));
+      } else {
+        resolve({ id: 1, name: "Async Data" });
+      }
+    }, 300);
+  });
+}
+
+// Step 2: Async function with try...catch and debugging
+async function getData() {
+  try {
+    console.info("Awaiting fetchData...");
+    const result = await fetchData(true);
+    console.log("Data:", result);
+  } catch (err) {
+    console.error("Caught async error:", err.message); // Fetch failed
+    console.debug("Stack trace:", err.stack);
+  } finally {
+    console.info("Async function complete");
+  }
+}
+
+getData();
+
+// Explanation:
+// - console.debug can be filtered in dev tools for optional detailed logs.
+// - Use try...catch inside async for promise rejections.
+      </textarea>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: Global Error Handlers & Console Fallback -->
+    <div class="example">
+      <h2>Example 8: Global Error Handlers & Console Fallback</h2>
+      <p>
+        Capture uncaught exceptions and unhandled promise rejections globally; provide console fallbacks if methods are unavailable.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Fallback for console methods (in older browsers)
+if (typeof console === "undefined") {
+  window.console = {};
+}
+["log","info","warn","error","debug","trace","group","groupEnd","table"].forEach(method => {
+  console[method] = console[method] || function() {};
+});
+
+// Step 2: Global error handler
+window.onerror = function(message, source, lineno, colno, error) {
+  console.error("Global onerror caught:", message, "at", source + ":" + lineno + ":" + colno);
+  if (error && error.stack) {
+    console.debug(error.stack);
+  }
+  return true; // Prevent default logging if desired
+};
+
+// Step 3: Global unhandled rejection handler
+window.onunhandledrejection = function(event) {
+  console.error("Unhandled rejection:", event.reason);
+  if (event.reason && event.reason.stack) {
+    console.debug(event.reason.stack);
+  }
+  event.preventDefault(); // Prevent default console warning
+};
+
+// Step 4: Trigger uncaught exception
+setTimeout(() => {
+  nonExistentFunction(); // ReferenceError, caught by window.onerror
+}, 100);
+
+// Step 5: Trigger unhandled rejection
+new Promise((_, reject) => {
+  reject(new Error("Promise rejection without catch"));
+});
+
+// Explanation:
+// - Provide no-op console methods to avoid errors in environments without console.
+// - window.onerror and window.onunhandledrejection capture global errors and log with console.
+      </textarea>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: Conditional Logging Level & console.time -->
+    <div class="example">
+      <h2>Example 9: Conditional Logging Level & <code>console.time</code></h2>
+      <p>
+        Dynamically adjust logging verbosity and measure performance with <code>console.time</code> and <code>console.timeEnd</code>.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Define log level
+const LOG_LEVEL = "DEBUG"; // Options: "ERROR", "WARN", "INFO", "DEBUG"
+
+// Step 2: Conditional logger
+function logger(level, ...messages) {
+  const levels = { "ERROR": 0, "WARN": 1, "INFO": 2, "DEBUG": 3 };
+  if (levels[level] <= levels[LOG_LEVEL]) {
+    switch (level) {
+      case "ERROR":
+        console.error(...messages);
+        break;
+      case "WARN":
+        console.warn(...messages);
+        break;
+      case "INFO":
+        console.info(...messages);
+        break;
+      case "DEBUG":
+        console.debug(...messages);
+        break;
+      default:
+        console.log(...messages);
+    }
+  }
+}
+
+// Step 3: Use logger
+logger("DEBUG", "This is a debug message");
+logger("INFO", "This is an info message");
+logger("WARN", "This is a warning");
+logger("ERROR", "This is an error");
+
+// Step 4: Measure execution time
+console.time("Calculation");
+let sum = 0;
+for (let i = 0; i < 1000000; i++) {
+  sum += i;
+}
+console.timeEnd("Calculation"); // Logs time taken
+
+// Explanation:
+// - Adjust LOG_LEVEL to filter logs at runtime.
+// - console.time and console.timeEnd measure time between calls.
+      </textarea>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: Best Practices Recap & Complex Scenario -->
+    <div class="example">
+      <h2>Example 10: Best Practices Recap & Complex Scenario</h2>
+      <p>
+        Recap best practices and demonstrate a complex scenario combining error handling and console logging.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: Centralized logger and error handler
+const LOG_LEVEL = "INFO";
+function logger(level, ...messages) {
+  const levels = { "ERROR": 0, "WARN": 1, "INFO": 2, "DEBUG": 3 };
+  if (levels[level] <= levels[LOG_LEVEL]) {
+    switch (level) {
+      case "ERROR": console.error(...messages); break;
+      case "WARN": console.warn(...messages); break;
+      case "INFO": console.info(...messages); break;
+      case "DEBUG": console.debug(...messages); break;
+      default: console.log(...messages);
+    }
+  }
+}
+function handleError(err) {
+  const timestamp = new Date().toISOString();
+  logger("ERROR", `[${timestamp}] ${err.name}: ${err.message}`);
+  if (err.stack) {
+    logger("DEBUG", err.stack);
+  }
+}
+
+// Step 2: Complex function with nested operations
+async function processData(data) {
+  try {
+    logger("INFO", "Starting processData");
+    if (!data) throw new Error("No data provided");
+    if (!data.items || !Array.isArray(data.items)) {
+      throw new TypeError("data.items must be an array");
+    }
+
+    // Process items with performance measurement
+    console.time("ProcessItems");
+    const results = data.items.map((item, index) => {
+      if (!item.value) {
+        throw new RangeError(`Item at index ${index} missing value`);
+      }
+      return item.value * 2;
+    });
+    console.timeEnd("ProcessItems");
+    logger("INFO", "Processed results:", results);
+
+    // Simulate async operation
+    await new Promise((resolve, reject) => {
+      setTimeout(() => resolve("Async result"), 200);
+    });
+    logger("INFO", "Async operation completed");
+
+    return results;
+  } catch (err) {
+    handleError(err);
+    // Optionally rethrow or return fallback
+    return null;
+  } finally {
+    logger("DEBUG", "processData finally block executed");
+  }
+}
+
+// Step 3: Invoke with valid data
+processData({ items: [{ value: 1 }, { value: 2 }, { value: 3 }] })
+  .then(res => logger("INFO", "Final result:", res));
+
+// Step 4: Invoke with invalid data to trigger errors
+processData({ items: [ { }, { value: 5 } ] })
+  .then(res => logger("INFO", "Final result:", res));
+
+// Explanation:
+// - Centralized logger filters messages based on LOG_LEVEL.
+// - handleError logs errors with timestamp and stack trace at debug level.
+// - processData demonstrates nested error conditions, performance timing, and async handling.
+// - finally block logs cleanup or final actions.
+      </textarea>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          // Backup original console methods
+          const originalConsole = { ...console };
+          // Override console to capture output
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          console.info = console.log;
+          console.warn = console.log;
+          console.error = console.log;
+          console.debug = console.log;
+          console.trace = console.log;
+          console.group = console.log;
+          console.groupEnd = console.log;
+          console.table = function(data) {
+            try {
+              const table = Array.isArray(data) ? data : [data];
+              consoleOutput.innerHTML += JSON.stringify(table, null, 2) + '\n';
+            } catch {
+              consoleOutput.innerHTML += String(data) + '\n';
+            }
+          };
+          console.time = function(label) {
+            originalConsole.time(label);
+            consoleOutput.innerHTML += `Timer started: ${label}\n`;
+          };
+          console.timeEnd = function(label) {
+            originalConsole.timeEnd(label);
+            consoleOutput.innerHTML += `Timer ended: ${label}\n`;
+          };
+
+          // Execute the code
+          eval(code);
+
+          // Restore original console
+          Object.assign(console, originalConsole);
+        } catch (error) {
+          // Restore console before logging error
+          console.log = consoleOutput => {
+            consoleOutput.innerHTML += `Error: ${error.message}\n`;
+          };
+          console.log();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

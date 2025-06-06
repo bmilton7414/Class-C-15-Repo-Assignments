@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Booleans & Operators Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Booleans & Operators Examples</h1>
+
+    <!-- Overview Section -->
+    <div class="example">
+      <h2>Overview: Booleans & Operators</h2>
+      <p>
+        Booleans represent <code>true</code> or <code>false</code>. Operators in JavaScript perform operations on values, including:
+      </p>
+      <ul>
+        <li><strong>Boolean Values:</strong> <code>true</code>, <code>false</code></li>
+        <li><strong>Comparison Operators:</strong> <code>==</code>, <code>===</code>, <code>!=</code>, <code>!==</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+        <li><strong>Logical Operators:</strong> <code>&&</code> (AND), <code>||</code> (OR), <code>!</code> (NOT)</li>
+        <li><strong>Ternary Operator:</strong> <code>condition ? expr1 : expr2</code></li>
+        <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code></li>
+        <li><strong>Assignment Operators:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>**=</code></li>
+        <li><strong>Bitwise Operators:</strong> <code>&</code>, <code>|</code>, <code>^</code>, <code>~</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code></li>
+        <li><strong>Type Operators:</strong> <code>typeof</code>, <code>instanceof</code></li>
+      </ul>
+      <p><strong>Quick Tips & Common Pitfalls:</strong></p>
+      <ul>
+        <li><code>==</code> performs type coercion; <code>===</code> checks strict equality without coercion.</li>
+        <li>Be cautious: <code>null == undefined</code> is <code>true</code>, but <code>null === undefined</code> is <code>false</code>.</li>
+        <li>Falsy values: <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>. All others are truthy.</li>
+        <li>Operator precedence can change evaluation order—use parentheses to clarify.</li>
+        <li>Short-circuit evaluation means <code>expr1 && expr2</code> stops if <code>expr1</code> is falsy, and <code>expr1 || expr2</code> stops if <code>expr1</code> is truthy.</li>
+      </ul>
+      <p><strong>Fun Fact:</strong> Booleans can be objects if created with <code>new Boolean()</code>. A Boolean object wrapping <code>false</code> is still truthy in conditionals!</p>
+    </div>
+
+    <!-- Example 1: Boolean Literals, Boolean() & typeof -->
+    <div class="example">
+      <h2>Example 1: Boolean Literals, <code>Boolean()</code> Conversion & <code>typeof</code></h2>
+      <p>
+        Booleans can be literal values or results of <code>Boolean()</code> conversion. Use <code>typeof</code> to inspect types.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Boolean literals
+const a = true;
+const b = false;
+console.log("a:", a, "| typeof a:", typeof a); // Output: true | boolean
+console.log("b:", b, "| typeof b:", typeof b); // Output: false | boolean
+
+// Step 2: Boolean conversion with Boolean()
+const truthyString = "hello";
+const falsyEmpty = "";
+console.log("Boolean('hello'):", Boolean(truthyString)); // true
+console.log("Boolean(''):", Boolean(falsyEmpty));       // false
+
+// Step 3: Boolean object (discouraged)
+const objBoolFalse = new Boolean(false);
+console.log("objBoolFalse:", objBoolFalse, "| typeof:", typeof objBoolFalse); 
+// Output: [Boolean: false] | object
+
+// Step 4: objBoolFalse in conditional (always truthy)
+if (objBoolFalse) {
+  console.log("Boolean object wrapping false is truthy!"); 
+  // Output: Boolean object wrapping false is truthy!
+}
+
+// Step 5: Comparing Boolean object to primitive
+console.log("objBoolFalse == false:", objBoolFalse == false); // true (coerced)
+console.log("objBoolFalse === false:", objBoolFalse === false); // false (different types)
+
+// Explanation:
+// - Boolean() converts values to true/false without creating objects.
+// - typeof Boolean object is "object" and always truthy in conditions.
+// - == coerces objBoolFalse to primitive; === does not.
+      </textarea>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: Truthy & Falsy Values in Depth -->
+    <div class="example">
+      <h2>Example 2: Truthy & Falsy Values in Depth</h2>
+      <p>
+        A value is <strong>falsy</strong> if <code>Boolean(value)</code> is <code>false</code>. Otherwise it is <strong>truthy</strong>. This affects conditionals and short-circuit logic.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: List all falsy values and check
+const falsyValues = [false, 0, -0, "", null, undefined, NaN];
+falsyValues.forEach(val => {
+  console.log("Value:", val, "| Boolean(val):", Boolean(val));
+});
+// Expected Output:
+// Value: false | Boolean(val): false
+// Value: 0 | Boolean(val): false
+// Value: 0 | Boolean(val): false  (because -0 is 0)
+// Value:  | Boolean(val): false
+// Value: null | Boolean(val): false
+// Value: undefined | Boolean(val): false
+// Value: NaN | Boolean(val): false
+
+// Step 2: Examples of truthy values (all non-falsy)
+const truthyValues = [true, 1, -1, "0", "false", {}, [], function(){}, Symbol()];
+truthyValues.forEach(val => {
+  console.log("Value:", val, "| Boolean(val):", Boolean(val));
+});
+// Expected: All Boolean(val) print true
+
+// Step 3: Using in conditional & short-circuit
+let x;
+console.log("x is:", x); // undefined
+console.log("x || 'default':", x || "default"); // "default"
+x = 5;
+console.log("x is now:", x);
+console.log("x && 'truthy':", x && "truthy"); // "truthy"
+
+// Explanation:
+// - Objects (including empty ones) and arrays are truthy.
+// - Symbol() is truthy.
+// - Short-circuit: OR returns first truthy, AND returns first falsy (or last if none).
+      </textarea>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: Comparison Operators & Type Coercion -->
+    <div class="example">
+      <h2>Example 3: Comparison Operators (<code>==</code> vs <code>===</code>) & Type Coercion</h2>
+      <p>
+        <code>==</code> performs type coercion before comparison, while <code>===</code> checks strict equality without coercion.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: == comparisons with type coercion
+console.log("5 == '5':", 5 == "5");          // true (string '5' coerced to number)
+console.log("0 == false:", 0 == false);      // true (false coerced to 0)
+console.log("'' == 0:", "" == 0);            // true ('' coerced to 0)
+console.log("null == undefined:", null == undefined); // true
+console.log("0 == '':", 0 == "");            // true
+console.log("0 == '0':", 0 == "0");          // true
+
+// Step 2: === strict comparisons
+console.log("5 === '5':", 5 === "5");        // false (different types)
+console.log("0 === false:", 0 === false);    // false
+console.log("null === undefined:", null === undefined); // false
+
+// Step 3: != vs !==
+console.log("5 != '5':", 5 != "5");          // false
+console.log("5 !== '5':", 5 !== "5");        // true
+
+// Step 4: Comparing objects & arrays
+console.log("[] == false:", [] == false);    // true (empty array coerced to '')
+console.log("[] === false:", [] === false);  // false
+console.log("[1,2] == '1,2':", [1,2] == "1,2"); // true (array to string)
+console.log("{} == {}:", {} == {});          // false (different object references)
+
+// Step 5: Relational operators with strings
+console.log("'apple' > 'banana':", "apple" > "banana"); // false (lex order)
+console.log("'2' > '10':", "2" > "10"); // true (string comparison: '2' > '1')
+
+// Explanation:
+// - == coerces types, === does not; avoid == due to complex rules.
+// - Objects and arrays are coerced to primitives when using ==.
+// - String comparison uses lexicographical order based on Unicode code points.
+      </textarea>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: Logical Operators (<code>&&</code>, <code>||</code>, <code>!</code>) with Return Values -->
+    <div class="example">
+      <h2>Example 4: Logical Operators (<code>&&</code>, <code>||</code>, <code>!</code>) with Return Values</h2>
+      <p>
+        Logical operators not only evaluate boolean expressions but also return values based on short-circuit rules.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: AND (&&) returns first falsy or last truthy
+console.log("false && 'hello':", false && "hello"); // false (stops at false)
+console.log("0 && 'hello':", 0 && "hello");         // 0
+console.log("'hi' && 'hello':", "hi" && "hello");   // "hello" (both truthy, returns last)
+
+// Step 2: OR (||) returns first truthy or last falsy
+console.log("false || 'hello':", false || "hello"); // "hello"
+console.log("0 || null:", 0 || null);               // null (both falsy, returns last)
+console.log("'hi' || 'hello':", "hi" || "hello");   // "hi" (first truthy)
+
+// Step 3: NOT (!) inverts value
+console.log("!true:", !true);   // false
+console.log("!0:", !0);         // true (0 is falsy)
+console.log("!!'world':", !!"world"); // true (double NOT to get boolean)
+
+// Step 4: Short-circuit evaluation with functions
+function log(val) {
+  console.log("Evaluated:", val);
+  return val;
+}
+console.log("Example AND short-circuit:");
+console.log(log(false) && log(true));
+// Output:
+// Evaluated: false
+// false
+
+console.log("Example OR short-circuit:");
+console.log(log(true) || log(false));
+// Output:
+// Evaluated: true
+// true
+
+// Explanation:
+// - && stops evaluating when it finds a falsy value.
+// - || stops evaluating when it finds a truthy value.
+// - Use !! to explicitly convert to boolean.
+      </textarea>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: Ternary Operator & Usage in Expressions -->
+    <div class="example">
+      <h2>Example 5: Ternary Operator (<code>condition ? expr1 : expr2</code>) & Usage in Expressions</h2>
+      <p>
+        The ternary operator is a shorthand for <code>if…else</code> in expressions and can be used for inline conditionals.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Basic ternary usage
+const age = 18;
+const canDrink = (age >= 21) ? "Yes" : "No";
+console.log("Can drink:", canDrink); // No
+
+// Step 2: Nested ternary (careful with readability)
+const score = 85;
+const grade = (score >= 90) ? "A" :
+              (score >= 80) ? "B" :
+              (score >= 70) ? "C" :
+              (score >= 60) ? "D" : "F";
+console.log("Grade:", grade); // B
+
+// Step 3: Inline in template literal
+const status = `User is ${age >= 18 ? "an adult" : "a minor"}`;
+console.log(status); // User is an adult
+
+// Step 4: Ternary with function calls
+function logAndReturn(val) {
+  console.log("Evaluating:", val);
+  return val;
+}
+const result = logAndReturn(true) ? logAndReturn("then") : logAndReturn("else");
+// Output:
+// Evaluating: true
+// Evaluating: then
+// "then"
+
+// Explanation:
+// - Syntax: condition ? exprWhenTrue : exprWhenFalse
+// - Evaluate condition, then return and evaluate only one of expr1 or expr2.
+// - Be cautious when nesting; consider readability.
+      </textarea>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: Arithmetic Operators & Type Coercion -->
+    <div class="example">
+      <h2>Example 6: Arithmetic Operators (<code>+, -, *, /, %, **</code>) & Type Coercion</h2>
+      <p>
+        Arithmetic operators perform mathematical operations. When used with mixed types, JavaScript may coerce types to numbers or strings.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Basic operations
+console.log("5 + 3 =", 5 + 3);   // 8
+console.log("5 - 3 =", 5 - 3);   // 2
+console.log("5 * 3 =", 5 * 3);   // 15
+console.log("6 / 2 =", 6 / 2);   // 3
+console.log("7 % 3 =", 7 % 3);   // 1
+console.log("2 ** 3 =", 2 ** 3); // 8
+
+// Step 2: Type coercion with +
+console.log("'5' + 3 =", "5" + 3);   // "53" (string concatenation)
+console.log("5 + '3' =", 5 + "3");   // "53"
+console.log("'5' - 3 =", "5" - 3);   // 2 (string coerced to number)
+console.log("'5' * '2' =", "5" * "2"); // 10
+
+// Step 3: Division by zero & NaN
+console.log("5 / 0 =", 5 / 0);       // Infinity
+console.log("0 / 0 =", 0 / 0);       // NaN
+
+// Step 4: Increment & decrement
+let x = 5;
+console.log("x++ returns", x++);    // 5 (post-increment)
+console.log("x after x++:", x);     // 6
+console.log("++x returns", ++x);    // 7 (pre-increment)
+console.log("x-- returns", x--);    // 7 (post-decrement)
+console.log("x after x--:", x);     // 6
+console.log("--x returns", --x);    // 5 (pre-decrement)
+
+// Step 5: Operator precedence
+console.log("2 + 3 * 4 =", 2 + 3 * 4);     // 14
+console.log("(2 + 3) * 4 =", (2 + 3) * 4); // 20
+
+// Explanation:
+// - + concatenates if either operand is a string.
+// - Other operators coerce strings to numbers if possible.
+// - Infinity represents division by zero; NaN if operation invalid.
+// - Precedence: ** highest, then *, /, %, then +, -.
+      </textarea>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: Assignment Operators & Chaining -->
+    <div class="example">
+      <h2>Example 7: Assignment Operators (<code>=, +=, -=, *=, /=, %=, **=</code>) & Chaining</h2>
+      <p>
+        Assignment operators modify variables and can be chained or combined with arithmetic.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Basic assignment and inspection
+let a = 10;
+console.log("Initial a:", a); // 10
+
+// Step 2: Compound assignments
+a += 5;  // a = a + 5
+console.log("a += 5:", a); // 15
+a -= 3;  // a = a - 3
+console.log("a -= 3:", a); // 12
+a *= 2;  // a = a * 2
+console.log("a *= 2:", a); // 24
+a /= 4;  // a = a / 4
+console.log("a /= 4:", a); // 6
+a %= 4;  // a = a % 4
+console.log("a %= 4:", a); // 2
+a **= 3; // a = a ** 3
+console.log("a **= 3:", a); // 8
+
+// Step 3: Chained assignment
+let b, c;
+b = c = 5;
+console.log("b:", b, "| c:", c); // 5 5
+
+// Step 4: Using in expressions
+let x = 2, y = 3;
+console.log("x += y * 2 =", (x += y * 2)); // x = 2 + (3*2) = 8
+
+// Explanation:
+// - Compound assignments combine arithmetic with assignment.
+// - Chaining a = b = value sets both to value because rightmost evaluated first.
+      </textarea>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: Bitwise Operators & Two's Complement -->
+    <div class="example">
+      <h2>Example 8: Bitwise Operators (<code>&, |, ^, ~, &lt;&lt;, &gt;&gt;, &gt;&gt;&gt;</code>) & Two's Complement</h2>
+      <p>
+        Bitwise operators work on 32-bit integer representations. Negative numbers use two's complement.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: AND (&), OR (|), XOR (^)
+console.log("5 & 3 (0101 & 0011):", 5 & 3);   // 1
+console.log("5 | 3 (0101 | 0011):", 5 | 3);   // 7
+console.log("5 ^ 3 (0101 ^ 0011):", 5 ^ 3);   // 6
+
+// Step 2: NOT (~) flips bits (two's complement)
+console.log("~5 (invert 0000...0101):", ~5); // -6
+
+// Step 3: Left shift (<<), sign-propagating right shift (>>), zero-fill right shift (>>>)
+console.log("5 << 1:", 5 << 1);   // 10
+console.log("5 >> 1:", 5 >> 1);   // 2
+console.log("-5 >> 1:", -5 >> 1); // -3 (sign bit preserved)
+console.log("-5 >>> 1:", -5 >>> 1); // 2147483645 (zero-fill)
+
+// Step 4: Binary and hex literal representation
+console.log("0b101 << 1:", 0b101 << 1); // 10
+console.log("0xF & 0x1:", 0xF & 0x1);   // 1
+
+// Explanation:
+// - All operands converted to 32-bit signed integers.
+// - ~n equals -(n+1) due to two's complement.
+// - >>> shifts and fills with zero, turning negative into large positive.
+      </textarea>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: Type Operators (<code>typeof</code>, <code>instanceof</code>, <code>in</code>) -->
+    <div class="example">
+      <h2>Example 9: Type & Existence Operators (<code>typeof</code>, <code>instanceof</code>, <code>in</code>)</h2>
+      <p>
+        Determine types and check property existence at runtime.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: typeof examples
+console.log("typeof 42:", typeof 42);             // number
+console.log("typeof 'hello':", typeof "hello");   // string
+console.log("typeof true:", typeof true);         // boolean
+console.log("typeof {}:", typeof {});             // object
+console.log("typeof null:", typeof null);         // object (legacy quirk)
+console.log("typeof undefined:", typeof undefined); // undefined
+console.log("typeof Symbol():", typeof Symbol()); // symbol
+console.log("typeof function(){ }:", typeof function(){ }); // function
+console.log("typeof 10n:", typeof 10n);           // bigint
+
+// Step 2: instanceof examples
+function Person(name) {
+  this.name = name;
+}
+const p = new Person("Alice");
+console.log("p instanceof Person:", p instanceof Person); // true
+console.log("p instanceof Object:", p instanceof Object); // true
+console.log("[] instanceof Array:", [] instanceof Array); // true
+console.log("[] instanceof Object:", [] instanceof Object); // true
+
+// Step 3: in operator for property existence
+const obj = { a: 1 };
+console.log("'a' in obj:", "a" in obj);           // true
+console.log("'b' in obj:", "b" in obj);           // false
+console.log("'toString' in obj:", "toString" in obj); // true (inherited from prototype)
+
+// Explanation:
+// - typeof returns a string for primitives and functions.
+// - instanceof checks prototype chain.
+// - in checks own + inherited property names.
+      </textarea>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: Fun Fact – Boolean Object vs Primitive & Operator Precedence Table -->
+    <div class="example">
+      <h2>Example 10: Fun Fact – Boolean Object vs Primitive & Operator Precedence</h2>
+      <p>
+        Boolean primitives (<code>true</code>, <code>false</code>) differ from Boolean objects (<code>new Boolean()</code>). Operator precedence dictates evaluation order.
+      </p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Part A: Boolean primitive vs. Boolean object
+const primFalse = false;
+if (primFalse) {
+  console.log("Primitive false is truthy");
+} else {
+  console.log("Primitive false is falsy");
+  // Output: Primitive false is falsy
+}
+
+const objFalse = new Boolean(false);
+if (objFalse) {
+  console.log("Boolean object wrapping false is truthy");
+  // Output: Boolean object wrapping false is truthy
+}
+console.log("typeof objFalse:", typeof objFalse);    // object
+console.log("objFalse instanceof Boolean:", objFalse instanceof Boolean); // true
+
+// Part B: Operator precedence example
+// Precedence: ! (3), *, /, % (5), +, - (6), <,>,<=,>= (8), ==,===,!=,!== (9), && (13), || (14)
+const result = !false && 5 + 3 * 2 > 10 || 0;
+console.log("Expression:", "!false && 5 + 3 * 2 > 10 || 0");
+console.log("Step by step evaluation:");
+// 3*2 = 6
+// 5+6 = 11
+// 11 > 10 = true
+// !false = true
+// true && true = true
+// true || 0 = true
+console.log("Result:", result); // true
+
+// Explanation:
+// - Boolean objects always evaluate truthy.
+// - Operator precedence ensures multiplication before addition, then comparison, then logical AND, then logical OR.
+// - Use parentheses to override default precedence.
+      </textarea>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+          eval(code);
+          console.log = originalConsole;
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

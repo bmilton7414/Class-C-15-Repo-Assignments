@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Window Methods &amp; Window Objects Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .example {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .code-input {
+      width: calc(100% - 22px);
+      height: 200px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: monospace;
+    }
+
+    .console-output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: scroll;
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .run-button {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JavaScript Window Methods &amp; Window Objects Examples</h1>
+
+    <!-- Top Explanatory Section -->
+    <div class="example">
+      <h2>Why &amp; How It Works</h2>
+      <p>
+        The <code>window</code> object is the global root in browsers. It provides methods for user interaction (alert, prompt, confirm), timing (setTimeout, setInterval), navigation (location, history, open), and access to storage (localStorage, sessionStorage), among others.
+      </p>
+      <p><strong>How It Works:</strong></p>
+      <ul>
+        <li>Dialog methods (<code>alert</code>, <code>confirm</code>, <code>prompt</code>) block script execution until user interaction completes.</li>
+        <li>Timing methods schedule code execution asynchronously, allowing the main thread to continue. <code>setTimeout</code> and <code>setInterval</code> rely on the browser’s event loop.</li>
+        <li>The <code>location</code> and <code>history</code> objects let you read and manipulate the current URL and session navigation.</li>
+        <li>The <code>navigator</code> and <code>screen</code> objects provide information about the user’s browser and display.</li>
+        <li><code>localStorage</code> and <code>sessionStorage</code> persist key-value data in the browser, with different lifetimes (<code>localStorage</code> persists indefinitely; <code>sessionStorage</code> persists until the tab/window is closed).</li>
+        <li><code>globalThis</code> standardizes global scope access across environments.</li>
+      </ul>
+
+      <h2>Why It Matters</h2>
+      <p>
+        Interacting with the <code>window</code> object is essential for:
+      </p>
+      <ul>
+        <li>Creating user-friendly dialogs and prompts for input and confirmation.</li>
+        <li>Scheduling tasks asynchronously without blocking the UI thread.</li>
+        <li>Controlling navigation, reloading, and managing browser history for single-page applications.</li>
+        <li>Accessing environment and device information to tailor experiences.</li>
+        <li>Storing and retrieving data on the client side for state persistence and offline functionality.</li>
+      </ul>
+
+      <h2>Quick Rules of Thumb</h2>
+      <ul>
+        <li>Use <code>alert</code>/<code>confirm</code>/<code>prompt</code> sparingly—they block the UI and can be intrusive.</li>
+        <li>Prefer <code>setTimeout</code> over <code>setInterval</code> for repeated tasks if you need better control (set a new timeout at the end of the callback).</li>
+        <li>When manipulating <code>location</code>, use <code>assign()</code> or <code>replace()</code> depending on whether you want to add to history or replace the current entry.</li>
+        <li>Check <code>navigator.onLine</code> to detect network status changes, especially in progressive web apps.</li>
+        <li>Always handle cases where <code>localStorage</code> or <code>sessionStorage</code> might exceed quota or be disabled.</li>
+        <li>Use <code>globalThis</code> for portability between browser and non-browser environments.</li>
+      </ul>
+
+      <h2>Final Tips</h2>
+      <ul>
+        <li>For non-blocking user notifications, consider using custom modal dialogs (DOM-based) instead of <code>alert</code>.</li>
+        <li>Clean up intervals and timeouts using <code>clearInterval</code> and <code>clearTimeout</code> to avoid memory leaks.</li>
+        <li>When using <code>window.open</code>, be aware of popup blockers—modern browsers may block the call if not triggered by direct user interaction.</li>
+        <li>Prefer reading <code>location.href</code> over string-parsing manual URL components; use the <code>URL</code> API for robust URL manipulation.</li>
+        <li>Monitor <code>storage</code> events on <code>window</code> to synchronize data across multiple tabs.</li>
+        <li>When storing complex objects in <code>localStorage</code> or <code>sessionStorage</code>, serialize to JSON (<code>JSON.stringify</code>) and parse on retrieval (<code>JSON.parse</code>).</li>
+      </ul>
+    </div>
+
+    <!-- Example 1: alert Method -->
+    <div class="example">
+      <h2>Example 1: window.alert()</h2>
+      <p>
+        The <code>alert()</code> method displays an alert dialog with the specified message and an OK button.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example1-code">
+// Step 1: Display an alert dialog
+window.alert("This is an alert box!");
+
+// Step 2: After alert is closed, log a message to console
+console.log("Alert dialog was shown and dismissed.");
+
+// Explanation:
+// - <code>alert</code> pauses script execution until the user clicks OK.
+// - After dismissal, the console.log executes.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use <code>window.alert()</code> to display a message box. Once closed, a console message confirms dismissal.
+      </p>
+      <div class="console-output" id="example1-console"></div>
+      <button class="run-button" data-example-id="example1">
+        Run Example 1
+      </button>
+    </div>
+
+    <!-- Example 2: confirm Method -->
+    <div class="example">
+      <h2>Example 2: window.confirm()</h2>
+      <p>
+        The <code>confirm()</code> method displays a dialog with a specified message, along with OK and Cancel buttons. It returns <code>true</code> if OK is pressed, otherwise <code>false</code>.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example2-code">
+// Step 1: Show a confirm dialog
+let result = window.confirm("Do you confirm this action?");
+
+// Step 2: Log the result of confirm (true or false)
+console.log("User selected OK?", result);
+
+// Explanation:
+// - <code>confirm</code> returns a boolean based on user choice.
+// - <code>true</code> if OK, <code>false</code> if Cancel.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates <code>window.confirm()</code>. The returned boolean indicates which button the user clicked.
+      </p>
+      <div class="console-output" id="example2-console"></div>
+      <button class="run-button" data-example-id="example2">
+        Run Example 2
+      </button>
+    </div>
+
+    <!-- Example 3: prompt Method -->
+    <div class="example">
+      <h2>Example 3: window.prompt()</h2>
+      <p>
+        The <code>prompt()</code> method displays a dialog with an optional message prompting the user to input some text. It returns the entered text or <code>null</code> if cancelled.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example3-code">
+// Step 1: Show a prompt dialog asking for user input
+let name = window.prompt("Enter your name:", "Guest");
+
+// Step 2: Log the returned value (user input or null)
+console.log("User entered:", name);
+
+// Explanation:
+// - <code>prompt</code> returns a string or <code>null</code> if cancelled.
+// - The second argument is the default value shown in the input field.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows <code>window.prompt()</code> to retrieve a string from the user, then logs the result.
+      </p>
+      <div class="console-output" id="example3-console"></div>
+      <button class="run-button" data-example-id="example3">
+        Run Example 3
+      </button>
+    </div>
+
+    <!-- Example 4: setTimeout & clearTimeout -->
+    <div class="example">
+      <h2>Example 4: setTimeout &amp; clearTimeout</h2>
+      <p>
+        The <code>setTimeout()</code> method calls a function after a specified delay. <code>clearTimeout()</code> cancels a pending timeout.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example4-code">
+// Step 1: Schedule a function to run after 2 seconds
+let timeoutID = window.setTimeout(() => {
+  console.log("Timeout executed after 2 seconds.");
+}, 2000);
+console.log("Scheduled timeoutID:", timeoutID, "for 2000ms later");
+
+// Step 2: Schedule cancellation of that timeout after 1 second
+let clearID = window.setTimeout(() => {
+  window.clearTimeout(timeoutID);
+  console.log("Timeout was cleared before execution. (clearID:", clearID, ")");
+}, 1000);
+console.log("Scheduled clear of timeoutID:", timeoutID, "with clearID:", clearID, "after 1000ms");
+
+// Explanation:
+// - The first <code>setTimeout</code> logs after 2000ms.
+// - The second <code>setTimeout</code> cancels the first at 1000ms, logging its own message.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates using <code>setTimeout</code> to schedule a delayed action and <code>clearTimeout</code> to cancel it before execution, with all scheduling and outcome messages shown.
+      </p>
+      <div class="console-output" id="example4-console"></div>
+      <button class="run-button" data-example-id="example4">
+        Run Example 4
+      </button>
+    </div>
+
+    <!-- Example 5: setInterval & clearInterval -->
+    <div class="example">
+      <h2>Example 5: setInterval &amp; clearInterval</h2>
+      <p>
+        The <code>setInterval()</code> method calls a function repeatedly at specified intervals. <code>clearInterval()</code> stops further calls.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example5-code">
+// Step 1: Start an interval that logs every 1 second
+let count = 0;
+let intervalID = window.setInterval(() => {
+  count++;
+  console.log("Interval tick:", count);
+  if (count === 3) {
+    window.clearInterval(intervalID);
+    console.log("Interval cleared after 3 ticks.");
+  }
+}, 1000);
+
+// Explanation:
+// - <code>setInterval</code> returns an ID that can be used to cancel.
+// - Once <code>count</code> reaches 3, <code>clearInterval</code> stops it.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to repeatedly execute code every second and then stop after a condition is met.
+      </p>
+      <div class="console-output" id="example5-console"></div>
+      <button class="run-button" data-example-id="example5">
+        Run Example 5
+      </button>
+    </div>
+
+    <!-- Example 6: location Object -->
+    <div class="example">
+      <h2>Example 6: window.location Object</h2>
+      <p>
+        The <code>location</code> object contains information about the current URL and allows navigation.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example6-code">
+// Step 1: Log current URL components
+console.log("href:", window.location.href);
+console.log("protocol:", window.location.protocol);
+console.log("host:", window.location.host);
+console.log("pathname:", window.location.pathname);
+
+// Step 2: Demonstrate reload (commented out to prevent actual reload)
+// window.location.reload();
+
+// Step 3: Demonstrate assign (commented out to avoid navigation)
+// window.location.assign("https://example.com");
+
+// Explanation:
+// - <code>href</code> is the full URL.
+// - <code>protocol</code>, <code>host</code>, <code>pathname</code> break it down.
+// - <code>reload</code> refreshes the page; <code>assign</code> navigates to a new URL.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to inspect and use <code>window.location</code> properties to read and manipulate the current URL.
+      </p>
+      <div class="console-output" id="example6-console"></div>
+      <button class="run-button" data-example-id="example6">
+        Run Example 6
+      </button>
+    </div>
+
+    <!-- Example 7: history Object -->
+    <div class="example">
+      <h2>Example 7: window.history Object</h2>
+      <p>
+        The <code>history</code> object provides methods to navigate the session history.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example7-code">
+// Step 1: Log the length of history
+console.log("History length:", window.history.length);
+
+// Step 2: Go back in history (commented out to prevent actual navigation)
+// window.history.back();
+
+// Step 3: Go forward in history (commented out)
+// window.history.forward();
+
+// Explanation:
+// - <code>length</code> returns number of entries in session history.
+// - <code>back()</code> navigates to previous entry; <code>forward()</code> to next.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to query and navigate the browser’s session history using <code>window.history</code>.
+      </p>
+      <div class="console-output" id="example7-console"></div>
+      <button class="run-button" data-example-id="example7">
+        Run Example 7
+      </button>
+    </div>
+
+    <!-- Example 8: navigator Object -->
+    <div class="example">
+      <h2>Example 8: window.navigator Object</h2>
+      <p>
+        The <code>navigator</code> object provides information about the browser.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example8-code">
+// Step 1: Log user agent and platform
+console.log("User Agent:", window.navigator.userAgent);
+console.log("Platform:", window.navigator.platform);
+
+// Step 2: Log language and online status
+console.log("Language:", window.navigator.language);
+console.log("Online?", window.navigator.onLine);
+
+// Explanation:
+// - <code>userAgent</code> is a string identifying the browser.
+// - <code>platform</code> indicates OS/platform.
+// - <code>language</code> shows browser language setting.
+// - <code>onLine</code> is a boolean for network status.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to access <code>window.navigator</code> properties to gather browser-specific information.
+      </p>
+      <div class="console-output" id="example8-console"></div>
+      <button class="run-button" data-example-id="example8">
+        Run Example 8
+      </button>
+    </div>
+
+    <!-- Example 9: screen Object -->
+    <div class="example">
+      <h2>Example 9: window.screen Object</h2>
+      <p>
+        The <code>screen</code> object provides information about the user's screen.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example9-code">
+// Step 1: Log screen width and height
+console.log("Screen width:", window.screen.width);
+console.log("Screen height:", window.screen.height);
+
+// Step 2: Log available width and height
+console.log("Available width:", window.screen.availWidth);
+console.log("Available height:", window.screen.availHeight);
+
+// Explanation:
+// - <code>width</code> and <code>height</code> are total screen dimensions.
+// - <code>availWidth</code> and <code>availHeight</code> exclude OS taskbars/menus.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates using <code>window.screen</code> to read the user’s screen resolution and available workspace dimensions.
+      </p>
+      <div class="console-output" id="example9-console"></div>
+      <button class="run-button" data-example-id="example9">
+        Run Example 9
+      </button>
+    </div>
+
+    <!-- Example 10: window.open & window.close -->
+    <div class="example">
+      <h2>Example 10: window.open() &amp; window.close()</h2>
+      <p>
+        The <code>open()</code> method opens a new browser window or tab. The <code>close()</code> method closes the current window.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example10-code">
+// Step 1: Open a new window/tab with specified URL and features
+let newWin = window.open("https://example.com", "_blank", "width=400,height=300");
+
+// Step 2: Close the newly opened window after 3 seconds
+setTimeout(() => {
+  if (newWin) {
+    newWin.close();
+    console.log("New window closed.");
+  }
+}, 3000);
+
+// Explanation:
+// - <code>open()</code> returns a reference to the new window object.
+// - <code>close()</code> closes the referenced window.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates opening a new window or tab and then closing it after a delay.
+      </p>
+      <div class="console-output" id="example10-console"></div>
+      <button class="run-button" data-example-id="example10">
+        Run Example 10
+      </button>
+    </div>
+
+    <!-- Example 11: localStorage -->
+    <div class="example">
+      <h2>Example 11: window.localStorage</h2>
+      <p>
+        The <code>localStorage</code> object allows storing key-value pairs in the browser with no expiration.
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example11-code">
+// Step 1: Store a value in localStorage
+window.localStorage.setItem("username", "Alice");
+
+// Step 2: Retrieve the stored value
+let storedUser = window.localStorage.getItem("username");
+console.log("Stored username:", storedUser);
+
+// Step 3: Remove the stored item
+window.localStorage.removeItem("username");
+console.log("After removal, username is:", window.localStorage.getItem("username"));
+
+// Step 4: Clear all localStorage (commented out to avoid clearing other data)
+// window.localStorage.clear();
+
+// Explanation:
+// - <code>setItem</code> and <code>getItem</code> manage key-value pairs.
+// - <code>removeItem</code> deletes a specific key.
+// - <code>clear</code> removes all keys.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to store, retrieve, and remove data using <code>window.localStorage</code>.
+      </p>
+      <div class="console-output" id="example11-console"></div>
+      <button class="run-button" data-example-id="example11">
+        Run Example 11
+      </button>
+    </div>
+
+    <!-- Example 12: sessionStorage -->
+    <div class="example">
+      <h2>Example 12: window.sessionStorage</h2>
+      <p>
+        The <code>sessionStorage</code> object stores key-value pairs for the duration of the page session (until the tab is closed).
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example12-code">
+// Step 1: Store a value in sessionStorage
+window.sessionStorage.setItem("sessionID", "ABC123");
+
+// Step 2: Retrieve the stored value
+let sessionID = window.sessionStorage.getItem("sessionID");
+console.log("Session ID:", sessionID);
+
+// Step 3: Remove the stored item
+window.sessionStorage.removeItem("sessionID");
+console.log("After removal, sessionID is:", window.sessionStorage.getItem("sessionID"));
+
+// Step 4: Clear all sessionStorage (commented out to avoid clearing other data)
+// window.sessionStorage.clear();
+
+// Explanation:
+// - <code>sessionStorage</code> works similarly to <code>localStorage</code> but is cleared when the session ends.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example shows how to use <code>window.sessionStorage</code> to store data for the current browser session.
+      </p>
+      <div class="console-output" id="example12-console"></div>
+      <button class="run-button" data-example-id="example12">
+        Run Example 12
+      </button>
+    </div>
+
+    <!-- Example 13: globalThis Object -->
+    <div class="example">
+      <h2>Example 13: globalThis Object</h2>
+      <p>
+        The <code>globalThis</code> object provides a standard way to access the global object across different environments (browser, Node, etc.).
+      </p>
+      <p>Example breakdown:</p>
+      <p><strong>Code:</strong></p>
+      <textarea class="code-input" id="example13-code">
+// Step 1: Log a property from globalThis (same as window in browser)
+console.log("globalThis === window?", globalThis === window);
+
+// Step 2: Define a global variable and access via globalThis
+var globalVar = "I am global";
+console.log("Access via globalThis:", globalThis.globalVar);
+
+// Step 3: Assign a new global property
+globalThis.newGlobal = "New value";
+console.log("newGlobal property:", window.newGlobal);
+
+// Explanation:
+// - <code>globalThis</code> always refers to the global object.
+// - In browsers, <code>globalThis</code> and <code>window</code> are identical.
+      </textarea>
+      <p><strong>Description:</strong></p>
+      <p>
+        This example demonstrates how to use <code>globalThis</code> to access and set global variables in a consistent manner.
+      </p>
+      <div class="console-output" id="example13-console"></div>
+      <button class="run-button" data-example-id="example13">
+        Run Example 13
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.run-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const exampleId = button.getAttribute('data-example-id');
+        const code = document.getElementById(`${exampleId}-code`).value;
+        const consoleOutput = document.getElementById(`${exampleId}-console`);
+        consoleOutput.innerHTML = '';
+
+        try {
+          const originalConsole = console.log;
+          console.log = function(...args) {
+            args.forEach(arg => {
+              let formatted;
+              if (typeof arg === 'object' && arg !== null) {
+                formatted = JSON.stringify(arg, function(key, value) {
+                  if (typeof value === 'function') {
+                    return value.toString();
+                  }
+                  return value;
+                }, 2);
+              } else {
+                formatted = arg;
+              }
+              consoleOutput.innerHTML += formatted + '\n';
+            });
+          };
+
+          eval(code);
+
+          // For Example 4: keep console overridden to capture delayed logs.
+          if (exampleId !== "example4") {
+            console.log = originalConsole;
+          }
+        } catch (error) {
+          console.log = originalConsole;
+          consoleOutput.innerHTML = 'Error: ' + error.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
