@@ -11,7 +11,7 @@ body {
     font-size: 1.5rem;
   color: #222;
   line-height: 1.6;
-  background-color: #f0f0f0;
+  background-color: #0e0303;
   padding: 1rem;
 }
 
@@ -69,7 +69,10 @@ body {
   .right-column {
     width: 100%;
   }
-}
+  .full-width {
+    width: 100%;
+  }}
+
 
 .styled-image {
   display: block;
@@ -81,3 +84,8 @@ body {
   position: center;
 
 }
+
+img {
+  margin: auto;
+}
+

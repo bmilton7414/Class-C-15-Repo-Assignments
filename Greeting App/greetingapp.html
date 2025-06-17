@@ -1,0 +1,74 @@
+
+ 
+ <!DOCTYPE
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, 
+initial-scale=1.0"> 
+  <title>DOM Manipulation Deep Dive</title> 
+  <style> 
+    body { 
+      font-family: sans-serif; 
+      margin: 20px; 
+      line-height: 1.6; 
+    } 
+ 
+    #greet { 
+      font-size: 2em; 
+      margin-bottom: 1em; 
+    } 
+ 
+    .red { 
+      color: red; 
+    } 
+ 
+    .blue { 
+      color: blue; 
+    } 
+ 
+    button { 
+      margin-right: 0.5em; 
+      padding: 0.75em 1.5em; 
+      cursor: pointer; 
+      border: 1px solid #ccc; 
+      border-radius: 5px; 
+      background-color: #40bebc; 
+    } 
+ 
+    button:hover { 
+      background-color: #16c213; 
+    } 
+  </style> 
+</head> 
+<body> 
+JavaScript
+ 
+  <h1 id="greet" class="blue">Hello, World!</h1> 
+  <button id="btnText">Change Text</button> 
+  <button id="btnColor">Toggle Color</button> 
+ 
+  <script> 
+    // A) Grab elements 
+    const greeting = document.getElementById('greet'); 
+    const btnText = document.getElementById('btnText'); 
+    const btnColor = document.getElementById('btnColor'); 
+ 
+    // B) Attach click handlers 
+    btnText.onclick = toggleText; 
+    btnColor.onclick = toggleColor; 
+ 
+    // C) Toggle the heading’s text between Hello and Goodbye 
+    function toggleText() { 
+      greeting.textContent = greeting.textContent === 'Hello, World!' ? 'Goodbye, World!' : 'Hello, World!'; 
+    } 
+ 
+    // D) Toggle between red and blue color classes 
+    function toggleColor() { 
+      greeting.classList.toggle('red'); 
+      greeting.classList.toggle('blue'); 
+    } 
+  </script> 
+ 
+</body> 
+</html> 
