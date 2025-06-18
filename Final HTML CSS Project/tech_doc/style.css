@@ -21,9 +21,18 @@ body {
   border-right: 1px solid #ccc;
   /* padding: 1rem; */
   min-width: 290px;
+  
+}
+
+#navbar li a {
+  list-style-type: none;
+  padding: 0;
+  text-decoration: none;
+  color: #151501;
 }
 
 #main-doc {
+
   margin-left: 50vw;   /* Push main content right of navbar */
   padding: 2rem;
   
@@ -69,23 +78,32 @@ body {
   border: none;
   border-radius: 5px;
 }
+  
 
 /* Night Mode Theme */
 body.night-mode {
   background-color: #504e53; /* Soft dark purple */
   color: #f0e6ff;
+  
 }
 
 /* Adjust navbar background in night mode */
 body.night-mode #navbar {
   background-color: #555456;
-  border-right: 1px solid #6648a0;
+  border-right: 1px solid #cbc108;
+}
+
+/* light text for night mode */
+body.night-mode #navbar li a {
+  color: #e1e120; 
 }
 
 
 html, body {
   margin: 0;
   padding: 0;
+
 }
+
 
 
