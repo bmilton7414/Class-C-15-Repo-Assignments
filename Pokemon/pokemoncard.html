@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Promise Demo</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 2rem;
+        background-color: #111010;
+      }
+
+      #card {
+        display: inline-block;
+        padding: 1.5rem;
+        border: 2px solid #ffcb05;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #ffffff;
+      }
+
+      img {
+        width: 150px;
+      }
+
+      #name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ef5350;
+        margin-top: 1rem;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+
+    <div id="card">
+      <img id="image" src="" alt="Pokémon image" />
+      <img id="image2" src="" alt="Pokémon image" />
+      <p id="name">Loading...</p>
+    </div>
+
+    <script>
+      function getData(url) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+
+          xhr.onload = () => {
+            if (xhr.status === 200) {
+              resolve(JSON.parse(xhr.responseText));
+            } else {
+              reject("Error: " + xhr.status);
+            }
+          };
+
+          xhr.onerror = () => reject("Network error");
+          xhr.send();
+        });
+      }
+
+      // Use the exact endpoint for Charmander
+      const apiURL = "https://pokeapi.co/api/v2/pokemon/charmander";
+
+      getData(apiURL)
+        .then((data) => {
+          document.getElementById("name").textContent = data.name;
+          document.getElementById("image").src = data.sprites.front_default;
+          document.getElementById("image2").src = data.sprites.back_default;
+        })
+        .catch((error) => {
+          document.getElementById("name").textContent = error;
+          document.getElementById("image").src = "";
+        });
+    </script>
+  </body>
+</html>
