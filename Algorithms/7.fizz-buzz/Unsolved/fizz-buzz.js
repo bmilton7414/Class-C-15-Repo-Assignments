@@ -5,6 +5,18 @@
 // If a number is not divisible by 3 or 5, print the number
 
 function fizzBuzz(arr) {
-    //code
+    for (var i = 0; i < arr.length; i++) {
+    var num = arr[i];
+
+    if (num % 3 === 0 && num % 5 === 0) {
+      console.log("Fizz Buzz");
+    } else if (num % 3 === 0) {
+      console.log("Fizz");
+    } else if (num % 5 === 0) {
+      console.log("Buzz");
+    } else {
+      console.log(num);
+    }
+  }
 }
 
