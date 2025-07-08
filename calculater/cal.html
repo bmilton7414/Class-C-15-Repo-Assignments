@@ -14,15 +14,26 @@
 
   <!-- Internal styles for layout and appearance -->
   <style>
+  h1 {
+  margin-bottom: 20px;
+  color: #100f0f;
+ text-align: center;
+}
+
     /* Center the calculator in the middle of the screen */
     body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #cbc9c9;
-      margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  justify-content: flex-start; /* Start from top */
+  align-items: center; /* Center horizontally */
+  height: 100vh;
+  background-color: #cbc9c9;
+  margin: 0;
+  padding-top: 40px; /* Push content down a little */
+  background-image: url("gradient-numerology-background_23-2150066816.avif");
+}
+  /* Background image */
     }
 
     /* Calculator box style */
@@ -31,18 +42,21 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  /* Subtle shadow */
+      align-items: center;
     }
 
     /* Display field style */
     #display {
       width: 100%;
       font-size: 28px;
-      padding: 12px;
+      padding: 12px 2px 4px 2px;
       margin-bottom: 15px;
-      text-align: right;  /* Align text to the right like a real calculator */
+      text-align: center;  /* Align text to the right like a real calculator */
       background-color: #fafafa;
       border: 1px solid #000000;
       border-radius: 4px;
+      margin: auto;
+
     }
 
     /* Layout for calculator buttons */
@@ -50,6 +64,8 @@
       display: grid;
       grid-template-columns: repeat(4, 60px);  /* 4 columns of 60px width */
       gap: 10px;  /* Space between buttons */
+      justify-content: center;  /* Center buttons in the grid */
+      margin-top: 5px;
     }
 
     /* Button appearance */
@@ -70,21 +86,25 @@
     /* Operator button style (e.g., +, -, *, /, =) */
     .operator {
       background-color: #312107;  /* Dark background for operators */
-      color: white;
+      color: rgb(6, 6, 6);
     }
 
     /* Regular number and control button style */
     .btn {
-      background-color: #f3eded;
+      background-color: #b4b1b1;
     }
 
     /* Make the zero button span across 2 columns for better design */
     .zero {
       grid-column: span 2;
+     
+
     }
   </style>
 </head>
 <body>
+  <h1>Calculator 
+  </h1>
 
   <!-- Calculator Container -->
   <div class="calculator">
