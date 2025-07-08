@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic HTML page setup -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Link to external JavaScript file, loaded after HTML parsing -->
+  <script src="cal.js" defer></script>
+
+  <!-- Internal styles for layout and appearance -->
+  <style>
+    /* Center the calculator in the middle of the screen */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #cbc9c9;
+      margin: 0;
+    }
+
+    /* Calculator box style */
+    .calculator {
+      background-color: rgb(17, 110, 239);  /* Blue background */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  /* Subtle shadow */
+    }
+
+    /* Display field style */
+    #display {
+      width: 100%;
+      font-size: 28px;
+      padding: 12px;
+      margin-bottom: 15px;
+      text-align: right;  /* Align text to the right like a real calculator */
+      background-color: #fafafa;
+      border: 1px solid #000000;
+      border-radius: 4px;
+    }
+
+    /* Layout for calculator buttons */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);  /* 4 columns of 60px width */
+      gap: 10px;  /* Space between buttons */
+    }
+
+    /* Button appearance */
+    button {
+      padding: 18px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+      background-color: #9808bc;  /* Purple hover */
+    }
+
+    /* Operator button style (e.g., +, -, *, /, =) */
+    .operator {
+      background-color: #312107;  /* Dark background for operators */
+      color: white;
+    }
+
+    /* Regular number and control button style */
+    .btn {
+      background-color: #f3eded;
+    }
+
+    /* Make the zero button span across 2 columns for better design */
+    .zero {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Calculator Container -->
+  <div class="calculator">
+
+    <!-- Display Field (readonly to prevent typing) -->
+    <input type="text" id="display" readonly value="0" />
+
+    <!-- Grid of Calculator Buttons -->
+    <div class="buttons">
+      <!-- Top row: Clear and operators -->
+      <button id="clear" class="btn">C</button>
+      <button id="divide" class="btn operator">/</button>
+      <button id="multiply" class="btn operator">*</button>
+      <button id="subtract" class="btn operator">-</button>
+
+      <!-- Second row: 7, 8, 9, + -->
+      <button id="seven" class="btn">7</button>
+      <button id="eight" class="btn">8</button>
+      <button id="nine" class="btn">9</button>
+      <button id="add" class="btn operator">+</button>
+
+      <!-- Third row: 4, 5, 6, = -->
+      <button id="four" class="btn">4</button>
+      <button id="five" class="btn">5</button>
+      <button id="six" class="btn">6</button>
+      <button id="equals" class="btn operator">=</button>
+
+      <!-- Fourth row: 1, 2, 3, . -->
+      <button id="one" class="btn">1</button>
+      <button id="two" class="btn">2</button>
+      <button id="three" class="btn">3</button>
+      <button id="decimal" class="btn">.</button>
+
+      <!-- Last row: 0 spanning 2 columns -->
+      <button id="zero" class="btn zero">0</button>
+    </div>
+  </div>
+
+  <!-- Optional: Script for running automated tests with FreeCodeCamp -->
+  <script src="CodeCampTester.js"></script>
+</body>
+</html>
