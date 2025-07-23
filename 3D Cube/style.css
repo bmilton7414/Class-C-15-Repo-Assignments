@@ -34,6 +34,7 @@ body {
   width: 250px;
   height: 250px;
   perspective: 600px;
+  
 }
 
 /* 4. The 3D cube */
@@ -52,6 +53,7 @@ body {
   height: 100%;
   background: url("beerus.gif") center/cover no-repeat;
   transform: translateZ(125px);
+  border: 2px solid rgb(8, 7, 7);
 }
 
 /* 6. Top face */
@@ -62,6 +64,14 @@ body {
   background: #f9ca24;
   transform: rotateX(90deg) translateZ(125px);
   transform-origin: top center;
+  border: 2px solid rgb(0, 0, 0);
+  text-align: center;
+  line-height: 250px; /* Center text vertically */
+  font-size: 40px;
+  color: #b848d1;
+  font-weight: bold;
+  
+  
 }
 
 /* 7. Bottom face */
@@ -72,6 +82,7 @@ body {
   background: #f9ca24;
   transform: rotateX(-90deg) translateZ(125px);
   transform-origin: bottom center;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 /* 8. Left face */
@@ -82,6 +93,7 @@ body {
   background: #f9ca24;
   transform: rotateY(-90deg) translateZ(125px);
   transform-origin: center left;
+  border: 2px solid rgb(0, 0, 0);
 }                       
 
 /* 9. Right face */
@@ -92,6 +104,7 @@ body {
   background: #f9ca24;
   transform: rotateY(90deg) translateZ(125px);
   transform-origin: center right;
+  border: 2px solid rgb(0, 0, 0);
 }
 /* 10. Back face */
 .cube-back {
@@ -100,4 +113,5 @@ body {
   height: 100%;
   background: url("buu.gif") center/cover no-repeat;
   transform: rotateY(180deg) translateZ(125px);
+  border: 2px solid rgb(0, 0, 0);
 }  
