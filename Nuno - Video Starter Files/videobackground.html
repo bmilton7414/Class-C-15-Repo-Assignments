@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NUNO - Responsive Bootstrap Theme</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+        crossorigin="anonymous" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/fixed.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Video background styles */
+    .video-wrap {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -100;
+      background: black;
+    }
+    .video-wrap video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: -50;
+    }
+
+    /* Hero overlay */
+    .overlay-content {
+      position: relative;
+      z-index: 10;
+      padding: 3rem 1rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    /* Branding */
+    .logo {
+      max-height: 50px;
+      width: auto;
+    }
+
+    header {
+      position: relative;
+      z-index: 20;
+    }
+
+    .spacer {
+      height: 4rem;
+    }
+
+    body.dark-mode {
+      background-color: #ac0e0e !important;
+      color: #12ac29 !important;
+    }
+
+    @media (max-width: 768px) {
+      .overlay-content h1 {
+        font-size: 1.75rem;
+      }
+      .overlay-content .lead {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-dark text-light">
+
+  <!-- Video Background -->
+  <div class="video-wrap">
+    <video id="starsVideo" autoplay muted loop playsinline>
+      <source src="city.webm" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-dark px-3">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <img src="nuno.png" alt="NUNO Logo" class="logo" />
+        <span class="fs-5 mb-0">NUNO</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <button id="themeBtn" class="btn btn-outline-light btn-sm ms-md-3">
+              Toggle Dark Mode
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="course" class="overlay-content d-flex align-items-center justify-content-center" style="min-height:60vh;">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="display-5 fw-bold">Brad Milton</h1>
+      <p class="lead mb-4">An amazing, fantastic website developer!</p>
+      <a class="btn btn-secondary btn-sm" href="/Final HTML CSS Project/index.html" target="_blank">Portfolio Gallery</a>
+      <a class="btn btn-outline-light btn-sm ms-2" href="https://www.fastpeoplesearch.com/bradford-milton_id_G1156725008601577837">Learn More About Him</a>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer mt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="footer-brand mb-2">
+            <img src="nuno.png" alt="NUNO Logo" class="logo" />
+            <span class="h6 mb-0 text-white">NUNO</span>
+          </div>
+          <p>Building responsive, modern web experiences. Stay connected and keep learning.</p>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-white">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Theme</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-white">Follow</h6>
+          <div class="social-icons mb-2">
+            <a href="#" aria-label="Twitter">T</a>
+            <a href="#" aria-label="LinkedIn">L</a>
+            <a href="#" aria-label="GitHub">G</a>
+          </div>
+          <p class="small mb-0">&copy; <span id="year"></span> NUNO. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+  <script>
+    // jQuery fallback if CDN fails
+    window.jQuery || document.write('<script src="js/jquery-3.3.1.min.js"><\/script>');
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+          crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      // Toggle dark mode
+      $('#themeBtn').click(function () {
+        $('body').toggleClass('dark-mode');
+        $('body').toggleClass('bg-light text-dark');
+      });
+
+      // Set current year
+      $('#year').text(new Date().getFullYear());
+    });
+  </script>
+</body>
+</html>
